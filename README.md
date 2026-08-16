@@ -23,18 +23,11 @@ A full search tree is too complex for a small model to learn from directly. So w
 # Step 3, the Student: 
 We fine tuned small models (Qwen2.5-0.5B-Instruct and SmolLM-360M) on these flattened examples so they learn to copy the teacher's reasoning style, but in a single pass, no search needed at the end.
 
-## How well did it work?
+How well did it work?
 
 We tested everything on the hardest 100 puzzles in our dataset (ones the models never saw during training).
 
-| Model | Solved out of 100 |
-|---|---:|
-| Teacher (DeepSeek, full tree search) | 89 |
-| Our student (Qwen2.5-0.5B, fine tuned, best run) | 24 |
-| Our student (SmolLM-360M, fine tuned) | 0 |
-| Qwen2.5-0.5B with no fine tuning | 0 |
-| Closest comparable prior work's teacher | 19 |
-| Closest comparable prior work's student | 9 |
+<table> <thead> <tr> <th>Model</th> <th>Solved out of 100</th> </tr> </thead> <tbody> <tr> <td>Teacher (DeepSeek, full tree search)</td> <td>89</td> </tr> <tr> <td>Our student (Qwen2.5-0.5B, fine tuned, best run)</td> <td>24</td> </tr> <tr> <td>Our student (SmolLM-360M, fine tuned)</td> <td>0</td> </tr> <tr> <td>Qwen2.5-0.5B with no fine tuning</td> <td>0</td> </tr> <tr> <td>Closest comparable prior work's teacher</td> <td>19</td> </tr> <tr> <td>Closest comparable prior work's student</td> <td>9</td> </tr> </tbody> </table>
 
 Our teacher solved way more puzzles than the comparable prior work's teacher (89 vs 19), and in our best run, our student even beat their entire teacher model, not just their student. We also ended up with about ten times more training examples than that prior work, even though we used fewer source puzzles to get there.
 
