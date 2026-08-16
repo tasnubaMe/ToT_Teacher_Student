@@ -27,13 +27,13 @@ We fine tuned small models (Qwen2.5-0.5B-Instruct and SmolLM-360M) on these flat
 
 We tested everything on the hardest 100 puzzles in our dataset (ones the models never saw during training).
 
-# Model	                                                            Solved out of 100
-Teacher (DeepSeek, full tree search)	                              89
-Our student (Qwen2.5-0.5B, fine tuned, best run)	                  24
-Our student (SmolLM-360M, fine tuned)	                               0
-Qwen2.5-0.5B with no fine tuning	                                   0
-Closest comparable prior work's teacher	                            19
-Closest comparable prior work's student	                             9
+# | Model                                             |    Solved out of 100     |
+  | Teacher (DeepSeek, full tree search)              |    89                    |
+  | Our student (Qwen2.5-0.5B, fine tuned, best run)  |    24                    |
+  | Our student (SmolLM-360M, fine tuned)             |     0                    |
+  | Qwen2.5-0.5B with no fine tuning                  |     0                    |
+  | Closest comparable prior work's teacher           |    19                    |
+  | Closest comparable prior work's student           |     9                    |
 
 Our teacher solved way more puzzles than the comparable prior work's teacher (89 vs 19), and in our best run, our student even beat their entire teacher model, not just their student. We also ended up with about ten times more training examples than that prior work, even though we used fewer source puzzles to get there.
 
@@ -44,14 +44,14 @@ SmolLM-360M completely failed even though its training loss looked great. It tur
 We didn't just report one number and stop there. We reran the student training and evaluation 3 times, with different data setups and different random seeds, and ran statistical significance tests to check which results were real and which ones could have just been luck.
 
 # Different training data setups
-# Setup	Success                                             rate	                      Notes
-Backtracking data, greedy decoding (our main result)	      24%	                        best single run
-Backtracking data, greedy decoding, different seed	        19%	                        same setup, different random seed
-Clean examples only (no backtracking), sampling	            10 to 11%	                  ablation baseline
-Clean examples only, no seed control	                      6%                        	shows how much a run can swing
-Fixed at exactly 1 backtrack per example	                  13%	
-Fixed at exactly 2 backtracks per example	                  9%	
-Balanced mix of backtrack counts	                          16%	
+# |        Setup	Success                                |     rate             |       Notes                            | 
+  | Backtracking data, greedy decoding (our main result) |	    24%	            |    best single run                     |
+  | Backtracking data, greedy decoding, different seed 	 |      19%	            |    same setup, different random seed   |
+  | Clean examples only (no backtracking), sampling	     |      10 to 11%	      |    ablation baseline                   |
+  | Clean examples only, no seed control	               |       6%             |    shows how much a run can swing      |
+  | Fixed at exactly 1 backtrack per example	           |      13%	            |
+  | Fixed at exactly 2 backtracks per example	           |       9%	            |
+  | Balanced mix of backtrack counts	                   |      16%	            |
 
 # A few honest takeaways from this:
 
@@ -61,13 +61,13 @@ Too many or too few backtracks in the training data both hurt. Fixing every exam
 Our student does not clearly beat the comparison paper's teacher. We initially framed our 24% student result as "beating their 19% teacher," but the significance test on this specific comparison came back with p = 0.39, which is not significant. So this is a real but weak result, it looks good, but we can't confidently claim it as a definite win. We are being upfront about this rather than overstating it.
 Statistical significance tests (n = 100 puzzles each)
 
-# Comparison	                                         Result	                          Significant?
-Our teacher (89%) vs comparison teacher (19%)	         p < 0.001	                      Yes
-Our student (24%) vs comparison student (9%)	         p = 0.007	                      Yes
-Our student (24%) vs comparison teacher (19%)	         p = 0.49	                        No, could be chance
-Our student (24%) vs SmolLM (0%)	                     p < 0.001	                      Yes
-Backtracking data vs clean only data (sampling)	       p = 0.014	                      Yes
-Backtracking data vs clean only data (greedy)	         p = 0.16	                        No, could be chance
+# | Comparison	                                   |            Result	              |          Significant?            |
+| Our teacher (89%) vs comparison teacher (19%)	   |            p < 0.001	            |              Yes                 |
+| Our student (24%) vs comparison student (9%)	   |            p = 0.007	            |              Yes                 |
+| Our student (24%) vs comparison teacher (19%)	   |            p = 0.49	            |              No, could be chance |
+| Our student (24%) vs SmolLM (0%)	               |            p < 0.001	            |              Yes                 |
+| Backtracking data vs clean only data (sampling)	 |            p = 0.014	            |              Yes                 |
+| Backtracking data vs clean only data (greedy)	   |            p = 0.16	            |              No, could be chance |
 
 
 # How to run this yourself
