@@ -23,17 +23,18 @@ A full search tree is too complex for a small model to learn from directly. So w
 # Step 3, the Student: 
 We fine tuned small models (Qwen2.5-0.5B-Instruct and SmolLM-360M) on these flattened examples so they learn to copy the teacher's reasoning style, but in a single pass, no search needed at the end.
 
-# How well did it work?
+## How well did it work?
 
 We tested everything on the hardest 100 puzzles in our dataset (ones the models never saw during training).
 
-# | Model                                             |    Solved out of 100     |
-  | Teacher (DeepSeek, full tree search)              |    89                    |
-  | Our student (Qwen2.5-0.5B, fine tuned, best run)  |    24                    |
-  | Our student (SmolLM-360M, fine tuned)             |     0                    |
-  | Qwen2.5-0.5B with no fine tuning                  |     0                    |
-  | Closest comparable prior work's teacher           |    19                    |
-  | Closest comparable prior work's student           |     9                    |
+| Model | Solved out of 100 |
+|---|---:|
+| Teacher (DeepSeek, full tree search) | 89 |
+| Our student (Qwen2.5-0.5B, fine tuned, best run) | 24 |
+| Our student (SmolLM-360M, fine tuned) | 0 |
+| Qwen2.5-0.5B with no fine tuning | 0 |
+| Closest comparable prior work's teacher | 19 |
+| Closest comparable prior work's student | 9 |
 
 Our teacher solved way more puzzles than the comparable prior work's teacher (89 vs 19), and in our best run, our student even beat their entire teacher model, not just their student. We also ended up with about ten times more training examples than that prior work, even though we used fewer source puzzles to get there.
 
@@ -45,6 +46,7 @@ We didn't just report one number and stop there. We reran the student training a
 
 # Different training data setups
 # |        Setup	Success                                |     rate             |       Notes                            | 
+  |---|---:|
   | Backtracking data, greedy decoding (our main result) |	    24%	            |    best single run                     |
   | Backtracking data, greedy decoding, different seed 	 |      19%	            |    same setup, different random seed   |
   | Clean examples only (no backtracking), sampling	     |      10 to 11%	      |    ablation baseline                   |
@@ -62,12 +64,13 @@ Our student does not clearly beat the comparison paper's teacher. We initially f
 Statistical significance tests (n = 100 puzzles each)
 
 # | Comparison	                                   |            Result	              |          Significant?            |
-| Our teacher (89%) vs comparison teacher (19%)	   |            p < 0.001	            |              Yes                 |
-| Our student (24%) vs comparison student (9%)	   |            p = 0.007	            |              Yes                 |
-| Our student (24%) vs comparison teacher (19%)	   |            p = 0.49	            |              No, could be chance |
-| Our student (24%) vs SmolLM (0%)	               |            p < 0.001	            |              Yes                 |
-| Backtracking data vs clean only data (sampling)	 |            p = 0.014	            |              Yes                 |
-| Backtracking data vs clean only data (greedy)	   |            p = 0.16	            |              No, could be chance |
+  |---|---:|
+  | Our teacher (89%) vs comparison teacher (19%)	   |            p < 0.001	            |              Yes                 |
+  | Our student (24%) vs comparison student (9%)	   |            p = 0.007	            |              Yes                 |
+  | Our student (24%) vs comparison teacher (19%)	   |            p = 0.49	            |              No, could be chance |
+  | Our student (24%) vs SmolLM (0%)	               |            p < 0.001	            |              Yes                 |
+  | Backtracking data vs clean only data (sampling)	 |            p = 0.014	            |              Yes                 |
+  | Backtracking data vs clean only data (greedy)	   |            p = 0.16	            |              No, could be chance |
 
 
 # How to run this yourself
