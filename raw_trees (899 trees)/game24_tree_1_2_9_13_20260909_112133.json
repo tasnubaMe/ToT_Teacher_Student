@@ -1,0 +1,2778 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-09T11:21:33.537336",
+    "mode": "CodeAct with Dead-End Memory",
+    "parameters": {
+      "temperature": 0.7,
+      "n_evaluate_sample": 3,
+      "n_select_sample": 5,
+      "max_steps": 6,
+      "api_delay": 0.01,
+      "enable_deadend_memory": true
+    },
+    "statistics": {
+      "total_nodes": 25,
+      "api_calls": 22,
+      "cache_hits": 0,
+      "solutions_found": 1,
+      "code_executions": 28,
+      "code_errors": 0,
+      "daily_requests": 22,
+      "session_start": "2026-09-09T11:20:17.326670",
+      "deadend_memory_enabled": true,
+      "deadend_memory_skipped": 17,
+      "total_input_tokens": 22631,
+      "total_output_tokens": 16252,
+      "api_saved_two_num_cache": 51,
+      "api_saved_3num_pattern": 2,
+      "api_saved_value_cache": 0,
+      "correct_path_in_proposals": true,
+      "winning_depth1_count": 4,
+      "winning_depth1_proposed": 1,
+      "deadend_memory": {
+        "patterns_stored": 450,
+        "two_num_cache_size": 4455,
+        "total_checked": 23,
+        "total_skipped": 17,
+        "skip_rate": "73.9%"
+      },
+      "time_seconds": 76.21
+    },
+    "correct_path_in_proposals": true,
+    "winning_depth1_count": 4,
+    "winning_depth1_proposed": 1,
+    "deadend_memory_summary": {
+      "enabled": true,
+      "patterns_stored": 450,
+      "total_checked": 23,
+      "total_skipped": 17,
+      "api_calls_saved": 51,
+      "api_saved_two_num_cache": 51,
+      "api_saved_3num_pattern": 2,
+      "api_saved_value_cache": 0
+    }
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "parent_id": null,
+      "state": [
+        1,
+        2,
+        9,
+        13
+      ],
+      "action": "",
+      "value": 0.0,
+      "depth": 0,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "",
+        "code": "",
+        "observation": ""
+      },
+      "path_history": "",
+      "evaluation": null,
+      "num_children": 4,
+      "children": {
+        "1": {
+          "id": 1,
+          "parent_id": 0,
+          "state": [
+            12,
+            2,
+            9
+          ],
+          "action": "[12, 2, 9]",
+          "value": 0.20066666666666666,
+          "depth": 1,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "Pair 0 and 3 (1 and 13) – subtraction gives 12, which is exactly half of 24, very promising.",
+            "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] - numbers[0]  # 13 - 1 = 12\nremaining = [numbers[1], numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[12, 2, 9]"
+          },
+          "path_history": "Pair 0 and 3 (1 and 13) – subtraction gives 12, which is exactly half of 24, very promising.\nResult: [12, 2, 9]",
+          "evaluation": {
+            "state": "[12, 2, 9]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": false,
+              "max_abs_value": 12
+            },
+            "llm_judgments": [
+              "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.67 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.22, 0.22 * 12 = 2.67 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.67 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.56 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.92 (no).  \n- attempt 5: 12 + 2 + 9 = 23 (no). 12 * 2 - 9 = 15 (no). 12 * 2 + 9 = 33 (no). 12 * (2 + 9) = 132 (no). (12 + 2) * 9 = 126 (no). (12 - 2) * 9 = 90 (no). (12 / 2) + 9 = 15 (no). (12 / 2) * 9 = 54 (no). no path found.  \n\nclosest result was 23 (within 20–28), so likely.\n\nanswer: likely",
+              "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.333, 1.333 * 2 = 2.666 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 2 / 12 = 0.1667, 0.1667 * 9 = 1.5 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.666 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). also 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.666 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.555 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: try (12 - 2) = 10, 10 + 9 = 19 (no). (12 - 9) = 3, 3 * 2 = 6 (already). (9 - 2) = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible",
+              "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.66 (no). 2 / 12 = 0.166, 0.166 * 9 = 1.5 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.66 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.66 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.55 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: 12 - 2 = 10, 10 + 9 = 19 (no). 12 - 9 = 3, 3 * 2 = 6 (no). 9 - 2 = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible"
+            ],
+            "reasoning": [
+              "LLM evaluations: ['likely', 'impossible', 'impossible']",
+              "Votes: sure=0, likely=1, impossible=2",
+              "Raw score: 0.201, Final score: 0.201"
+            ],
+            "score_breakdown": {
+              "raw_responses": [
+                "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.67 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.22, 0.22 * 12 = 2.67 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.67 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.56 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.92 (no).  \n- attempt 5: 12 + 2 + 9 = 23 (no). 12 * 2 - 9 = 15 (no). 12 * 2 + 9 = 33 (no). 12 * (2 + 9) = 132 (no). (12 + 2) * 9 = 126 (no). (12 - 2) * 9 = 90 (no). (12 / 2) + 9 = 15 (no). (12 / 2) * 9 = 54 (no). no path found.  \n\nclosest result was 23 (within 20–28), so likely.\n\nanswer: likely",
+                "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.333, 1.333 * 2 = 2.666 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 2 / 12 = 0.1667, 0.1667 * 9 = 1.5 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.666 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). also 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.666 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.555 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: try (12 - 2) = 10, 10 + 9 = 19 (no). (12 - 9) = 3, 3 * 2 = 6 (already). (9 - 2) = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible",
+                "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.66 (no). 2 / 12 = 0.166, 0.166 * 9 = 1.5 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.66 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.66 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.55 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: 12 - 2 = 10, 10 + 9 = 19 (no). 12 - 9 = 3, 3 * 2 = 6 (no). 9 - 2 = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible"
+              ],
+              "mapped_values": [
+                0.6,
+                0.001,
+                0.001
+              ],
+              "vote_counts": {
+                "impossible": 2,
+                "likely": 1,
+                "sure": 0
+              }
+            },
+            "final_value": 0.20066666666666666,
+            "pattern_match": null,
+            "pattern_penalty_applied": false,
+            "judgment": "impossible",
+            "extracted_operation": null,
+            "extracted_result": null
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "2": {
+          "id": 2,
+          "parent_id": 0,
+          "state": [
+            22,
+            1,
+            2
+          ],
+          "action": "[22, 1, 2]",
+          "value": 1.2,
+          "depth": 1,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?",
+            "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] + numbers[2]  # 13 + 9 = 22\nremaining = [numbers[0], numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[22, 1, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]",
+          "evaluation": {
+            "state": "[22, 1, 2]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": false,
+              "max_abs_value": 22
+            },
+            "llm_judgments": [
+              "[22, 1, 2]  \n- attempt 1 (division): 22 / 2 = 11, then 11 + 1 = 12 (no). 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+              "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+              "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure"
+            ],
+            "reasoning": [
+              "LLM evaluations: ['sure', 'sure', 'sure']",
+              "Votes: sure=3, likely=0, impossible=0",
+              "Raw score: 1.000, Final score: 1.200"
+            ],
+            "score_breakdown": {
+              "raw_responses": [
+                "[22, 1, 2]  \n- attempt 1 (division): 22 / 2 = 11, then 11 + 1 = 12 (no). 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+                "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+                "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure"
+              ],
+              "mapped_values": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "vote_counts": {
+                "impossible": 0,
+                "likely": 0,
+                "sure": 3
+              }
+            },
+            "final_value": 1.2,
+            "pattern_match": null,
+            "pattern_penalty_applied": false,
+            "judgment": "sure",
+            "extracted_operation": null,
+            "extracted_result": null
+          },
+          "num_children": 8,
+          "children": {
+            "5": {
+              "id": 5,
+              "parent_id": 2,
+              "state": [
+                24,
+                1
+              ],
+              "action": "[24, 1]",
+              "value": 0.01,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": false,
+              "codeact": {
+                "thought": "22 + 2 gives exactly 24, and we still have 1 to multiply later.",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[2]  # 22 + 2 = 24\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[24, 1]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 2 gives exactly 24, and we still have 1 to multiply later.\nResult: [24, 1]",
+              "evaluation": {
+                "state": "[24, 1]",
+                "is_final": false,
+                "heuristic_checks": {
+                  "has_premature_24": true
+                },
+                "llm_judgments": [],
+                "reasoning": [
+                  "⚠️ DEAD-END: Contains 24 but not final state"
+                ],
+                "score_breakdown": {},
+                "final_value": 0.01,
+                "pattern_match": null,
+                "pattern_penalty_applied": false
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "6": {
+              "id": 6,
+              "parent_id": 2,
+              "state": [
+                20,
+                1
+              ],
+              "action": "[20, 1]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[2]  # 22 - 2 = 20\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[20, 1]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).\nResult: [20, 1]",
+              "evaluation": {
+                "state": "[20, 1]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 20.0,1.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "7": {
+              "id": 7,
+              "parent_id": 2,
+              "state": [
+                22,
+                2
+              ],
+              "action": "[22, 2]",
+              "value": 1.2,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": false,
+              "codeact": {
+                "thought": "22 * 1 = 22, then 22 + 2 = 24.",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] * numbers[1]  # 22 * 1 = 22\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[22, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]",
+              "evaluation": {
+                "state": "[22, 2]",
+                "is_final": false,
+                "heuristic_checks": {
+                  "has_premature_24": false,
+                  "max_abs_value": 22
+                },
+                "llm_judgments": [
+                  "22 + 2 = 24 (exact).  \nanswer: sure",
+                  "22 + 2 = 24 (exact).  \nanswer: sure",
+                  "22 + 2 = 24 (exact!).  \nanswer: sure"
+                ],
+                "reasoning": [
+                  "LLM evaluations: ['sure', 'sure', 'sure']",
+                  "Votes: sure=3, likely=0, impossible=0",
+                  "Raw score: 1.000, Final score: 1.200",
+                  "✅ VERIFIER: '22 + 2=24' confirmed"
+                ],
+                "score_breakdown": {
+                  "raw_responses": [
+                    "22 + 2 = 24 (exact).  \nanswer: sure",
+                    "22 + 2 = 24 (exact).  \nanswer: sure",
+                    "22 + 2 = 24 (exact!).  \nanswer: sure"
+                  ],
+                  "mapped_values": [
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "vote_counts": {
+                    "impossible": 0,
+                    "likely": 0,
+                    "sure": 3
+                  }
+                },
+                "final_value": 1.2,
+                "pattern_match": null,
+                "pattern_penalty_applied": false,
+                "judgment": "sure",
+                "extracted_operation": "22 + 2",
+                "extracted_result": 24.0
+              },
+              "num_children": 1,
+              "children": {
+                "24": {
+                  "id": 24,
+                  "parent_id": 7,
+                  "state": [
+                    24.0
+                  ],
+                  "action": "22 + 2",
+                  "value": 1.0,
+                  "depth": 3,
+                  "is_solution": true,
+                  "is_pruned": false,
+                  "codeact": {
+                    "thought": "From [22, 2], 22 + 2 = 24",
+                    "code": "numbers = [22, 2]\na, b = 22, 2\nresult = 22 + 2\nnew_numbers = [result]",
+                    "observation": "[24]"
+                  },
+                  "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]\nOperation: 22 + 2 = 24",
+                  "evaluation": null,
+                  "num_children": 0,
+                  "children": {}
+                }
+              }
+            },
+            "8": {
+              "id": 8,
+              "parent_id": 2,
+              "state": [
+                11.0,
+                1
+              ],
+              "action": "[11.0, 1]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] / numbers[2]  # 22 / 2 = 11\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[11.0, 1]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.\nResult: [11.0, 1]",
+              "evaluation": {
+                "state": "[11.0, 1]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 11.0,1.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "9": {
+              "id": 9,
+              "parent_id": 2,
+              "state": [
+                3,
+                22
+              ],
+              "action": "[3, 22]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "1 + 2 = 3, then 22 + 3 = 25 (close).",
+                "code": "numbers = [22, 1, 2]\nres = numbers[1] + numbers[2]  # 1 + 2 = 3\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[3, 22]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n1 + 2 = 3, then 22 + 3 = 25 (close).\nResult: [3, 22]",
+              "evaluation": {
+                "state": "[3, 22]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 3.0,22.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "10": {
+              "id": 10,
+              "parent_id": 2,
+              "state": [
+                1,
+                22
+              ],
+              "action": "[1, 22]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "2 - 1 = 1, then 22 * 1 = 24.",
+                "code": "numbers = [22, 1, 2]\nres = numbers[2] - numbers[1]  # 2 - 1 = 1\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[1, 22]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n2 - 1 = 1, then 22 * 1 = 24.\nResult: [1, 22]",
+              "evaluation": {
+                "state": "[1, 22]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 1.0,22.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "11": {
+              "id": 11,
+              "parent_id": 2,
+              "state": [
+                23,
+                2
+              ],
+              "action": "[23, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "22 + 1 = 23, then 23 + 2 = 25 (not useful).",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[1]  # 22 + 1 = 23\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[23, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 1 = 23, then 23 + 2 = 25 (not useful).\nResult: [23, 2]",
+              "evaluation": {
+                "state": "[23, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 23.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "12": {
+              "id": 12,
+              "parent_id": 2,
+              "state": [
+                21,
+                2
+              ],
+              "action": "[21, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "22 - 1 = 21, then 21 + 2 = 23.",
+                "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[1]  # 22 - 1 = 21\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[21, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 1 = 21, then 21 + 2 = 23.\nResult: [21, 2]",
+              "evaluation": {
+                "state": "[21, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            }
+          }
+        },
+        "3": {
+          "id": 3,
+          "parent_id": 0,
+          "state": [
+            4,
+            1,
+            2
+          ],
+          "action": "[4, 1, 2]",
+          "value": 0.001,
+          "depth": 1,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.",
+            "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] - numbers[2]  # 13 - 9 = 4\nremaining = [numbers[0], numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[4, 1, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]",
+          "evaluation": {
+            "state": "[4, 1, 2]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": false,
+              "max_abs_value": 4
+            },
+            "llm_judgments": [
+              "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1 (factor of 24), then 1 * 4 = 4 (no). 4 - 2 = 2 (factor), then 2 * 1 = 2 (no). 4 - 1 = 3 (factor), then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 * 1 = 8 (no). 1 * 2 = 2, then 2 * 4 = 8 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no). 4 + 2 = 6, then 6 * 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no).  \n- attempt 5 (other combos): 4 + 1 + 2 = 7 (no). 4 * (1 + 2) = 12 (no). (4 + 2) * 1 = 6 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no result near 24.\n\nanswer: impossible",
+              "attempt 1 (division):  \n4 / 1 = 4, then 4 * 2 = 8 (no).  \n4 / 2 = 2, then 2 * 1 = 2 (no).  \n1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no).  \n2 / 1 = 2, then 2 * 4 = 8 (no).  \n1 / 2 = 0.5, then 0.5 * 4 = 2 (no).  \n\nattempt 2 (close subtraction):  \nclosest numbers: 1 and 2 → 2 - 1 = 1 (factor of 24).  \nthen 1 * 4 = 4 (no).  \n4 / 1 = 4 (no).  \n4 + 1 = 5 (no).  \n4 - 1 = 3 (no).  \n\nattempt 3 (multiplication):  \n4 * 1 = 4, then 4 * 2 = 8 (no).  \n4 * 2 = 8, then 8 * 1 = 8 (no).  \n1 * 2 = 2, then 2 * 4 = 8 (no).  \nalso try 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no).  \n\nattempt 4 (addition):  \n4 + 1 = 5, then 5 * 2 = 10 (no).  \n4 + 2 = 6, then 6 * 1 = 6 (no).  \n1 + 2 = 3, then 3 * 4 = 12 (no).  \nalso 4 + 1 + 2 = 7 (no).  \n\nattempt 5 (other combos):  \n(4 - 1) = 3, then 3 * 2 = 6 (no).  \n(4 - 2) = 2, then 2 * 1 = 2 (no).  \n(1 + 2) = 3, then 4 / 3 = 1.33 (no).  \n(4 / 1) = 4, then 4 + 2 = 6 (no).  \nno result near 24.  \n\nanswer: impossible",
+              "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1, then 1 * 4 = 4 (no). 4 - 2 = 2, then 2 * 1 = 2 (no). 4 - 1 = 3, then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no). 1 * 2 = 2, then 2 + 4 = 6 (no), 2 * 4 = 8 (no), 4 - 2 = 2 (no), 4 / 2 = 2 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no), 5 + 2 = 7 (no), 5 - 2 = 3 (no), 5 / 2 = 2.5 (no). 4 + 2 = 6, then 6 * 1 = 6 (no), 6 + 1 = 7 (no), 6 - 1 = 5 (no), 6 / 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no), 3 + 4 = 7 (no), 4 - 3 = 1 (no), 4 / 3 ≈ 1.33 (no).  \n- attempt 5: 4 * (2 + 1) = 12 (no). (4 + 1) * 2 = 10 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no path found.  \n\nanswer: impossible"
+            ],
+            "reasoning": [
+              "⚡ PATTERN HINT: matches failure pattern (hit=12, ops=['unknown'])",
+              "LLM evaluations: ['impossible', 'impossible', 'impossible']",
+              "Votes: sure=0, likely=0, impossible=3",
+              "🔒 PATTERN PENALTY: LLM confirmed + pattern match → score 0.001 → 0.001",
+              "Raw score: 0.001, Final score: 0.001"
+            ],
+            "score_breakdown": {
+              "raw_responses": [
+                "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1 (factor of 24), then 1 * 4 = 4 (no). 4 - 2 = 2 (factor), then 2 * 1 = 2 (no). 4 - 1 = 3 (factor), then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 * 1 = 8 (no). 1 * 2 = 2, then 2 * 4 = 8 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no). 4 + 2 = 6, then 6 * 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no).  \n- attempt 5 (other combos): 4 + 1 + 2 = 7 (no). 4 * (1 + 2) = 12 (no). (4 + 2) * 1 = 6 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no result near 24.\n\nanswer: impossible",
+                "attempt 1 (division):  \n4 / 1 = 4, then 4 * 2 = 8 (no).  \n4 / 2 = 2, then 2 * 1 = 2 (no).  \n1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no).  \n2 / 1 = 2, then 2 * 4 = 8 (no).  \n1 / 2 = 0.5, then 0.5 * 4 = 2 (no).  \n\nattempt 2 (close subtraction):  \nclosest numbers: 1 and 2 → 2 - 1 = 1 (factor of 24).  \nthen 1 * 4 = 4 (no).  \n4 / 1 = 4 (no).  \n4 + 1 = 5 (no).  \n4 - 1 = 3 (no).  \n\nattempt 3 (multiplication):  \n4 * 1 = 4, then 4 * 2 = 8 (no).  \n4 * 2 = 8, then 8 * 1 = 8 (no).  \n1 * 2 = 2, then 2 * 4 = 8 (no).  \nalso try 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no).  \n\nattempt 4 (addition):  \n4 + 1 = 5, then 5 * 2 = 10 (no).  \n4 + 2 = 6, then 6 * 1 = 6 (no).  \n1 + 2 = 3, then 3 * 4 = 12 (no).  \nalso 4 + 1 + 2 = 7 (no).  \n\nattempt 5 (other combos):  \n(4 - 1) = 3, then 3 * 2 = 6 (no).  \n(4 - 2) = 2, then 2 * 1 = 2 (no).  \n(1 + 2) = 3, then 4 / 3 = 1.33 (no).  \n(4 / 1) = 4, then 4 + 2 = 6 (no).  \nno result near 24.  \n\nanswer: impossible",
+                "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1, then 1 * 4 = 4 (no). 4 - 2 = 2, then 2 * 1 = 2 (no). 4 - 1 = 3, then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no). 1 * 2 = 2, then 2 + 4 = 6 (no), 2 * 4 = 8 (no), 4 - 2 = 2 (no), 4 / 2 = 2 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no), 5 + 2 = 7 (no), 5 - 2 = 3 (no), 5 / 2 = 2.5 (no). 4 + 2 = 6, then 6 * 1 = 6 (no), 6 + 1 = 7 (no), 6 - 1 = 5 (no), 6 / 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no), 3 + 4 = 7 (no), 4 - 3 = 1 (no), 4 / 3 ≈ 1.33 (no).  \n- attempt 5: 4 * (2 + 1) = 12 (no). (4 + 1) * 2 = 10 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no path found.  \n\nanswer: impossible"
+              ],
+              "mapped_values": [
+                0.001,
+                0.001,
+                0.001
+              ],
+              "vote_counts": {
+                "impossible": 3,
+                "likely": 0,
+                "sure": 0
+              }
+            },
+            "final_value": 0.001,
+            "pattern_match": {
+              "sorted_vals": [
+                4,
+                2,
+                1
+              ],
+              "op_sequence": [
+                "unknown"
+              ],
+              "thought": "Raw score: 0.001, Final score: 0.001",
+              "hit_count": 12
+            },
+            "pattern_penalty_applied": true,
+            "judgment": "impossible",
+            "extracted_operation": null,
+            "extracted_result": null
+          },
+          "num_children": 4,
+          "children": {
+            "13": {
+              "id": 13,
+              "parent_id": 3,
+              "state": [
+                3,
+                2
+              ],
+              "action": "[3, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.",
+                "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[1]  # 4 - 1 = 3\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[3, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.\nResult: [3, 2]",
+              "evaluation": {
+                "state": "[3, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 3.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "14": {
+              "id": 14,
+              "parent_id": 3,
+              "state": [
+                4,
+                2
+              ],
+              "action": "[4, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.",
+                "code": "numbers = [4, 1, 2]\nres = numbers[0] * numbers[1]  # 4 * 1 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[4, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.\nResult: [4, 2]",
+              "evaluation": {
+                "state": "[4, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 4.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "15": {
+              "id": 15,
+              "parent_id": 3,
+              "state": [
+                0.25,
+                2
+              ],
+              "action": "[0.25, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.",
+                "code": "numbers = [4, 1, 2]\nres = numbers[1] / numbers[0]  # 1 / 4 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[0.25, 2]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.\nResult: [0.25, 2]",
+              "evaluation": {
+                "state": "[0.25, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 0.25,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "16": {
+              "id": 16,
+              "parent_id": 3,
+              "state": [
+                2,
+                1
+              ],
+              "action": "[2, 1]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.",
+                "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[2]  # 4 - 2 = 2\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[2, 1]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.\nResult: [2, 1]",
+              "evaluation": {
+                "state": "[2, 1]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 2.0,1.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            }
+          }
+        },
+        "4": {
+          "id": 4,
+          "parent_id": 0,
+          "state": [
+            8,
+            2,
+            13
+          ],
+          "action": "[8, 2, 13]",
+          "value": 0.001,
+          "depth": 1,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.",
+            "code": "numbers = [1, 2, 9, 13]\nres = numbers[2] - numbers[0]   # 9 - 1 = 8\nremaining = [numbers[1], numbers[3]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[8, 2, 13]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]",
+          "evaluation": {
+            "state": "[8, 2, 13]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": false,
+              "max_abs_value": 13
+            },
+            "llm_judgments": [
+              "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 * 13 = 130 (no). 10 - 13 = -3 (no). 13 - 10 = 3 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 * 2 = 42 (no). 21 - 2 = 19 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 * 8 = 120 (no). 15 - 8 = 7 (no).  \n- attempt 5: try (13 - 8) = 5, then 5 * 2 = 10 (no). (13 + 2) = 15, 15 - 8 = 7 (no). (8 + 13) = 21, 21 + 2 = 23 (no). no path found.  \n\nno result within 0.001 of 24, and no result between 20 and 28 (closest was 23).  \n\nanswer: impossible",
+              "- attempt 1 (division): 13 / 2 = 6.5, 6.5 * 8 = 52 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615 (no). 2 / 13 = 0.154 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6, 6 * 13 = 78 (no). 13 - 8 = 5, 5 * 2 = 10 (no). 13 - 2 = 11, 11 * 8 = 88 (no).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 16 - 13 = 3 (no). 16 * 13 = 208 (no). 16 / 13 = 1.23 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 - 13 = -3 (no). 10 * 13 = 130 (no). 10 / 13 = 0.77 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 - 8 = 7 (no). 15 * 8 = 120 (no). 15 / 8 = 1.875 (no).  \n- attempt 5: no combination yields 24. closest was 23 or 26, but not within 0.001 of 24.  \n\nanswer: impossible",
+              "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 2 + 13 = 15, 15 + 8 = 23 (no).  \n- attempt 5 (addition with subtraction): 8 + 13 = 21, 21 - 2 = 19 (no). 13 + 2 = 15, 15 - 8 = 7 (no). 8 + 2 = 10, 10 - 13 = -3 (no).  \n\nno result near 24. closest was 23 (from addition) but that’s not within 0.001 of 24, and 23 is not between 20 and 28? wait 23 is between 20 and 28, but the rule says if found any result between 20 and 28 inclusive → likely. but we found 23, 21, 19, etc. 23 is between 20 and 28, so that would be \"likely\"? but the decision rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" we found 23 (from 8+2+13=23) and 21 (8+13=21) and 26 (2*13=26) — all between 20 and 28. so that would be \"likely\". but the memory critic says prior verdict was impossible. however, the rule is explicit: any result between 20 and 28 inclusive → likely. we have 23, 21, 26. so answer should be \"likely\". but wait, the examples show that if no exact 24 but a close result like 23, they still say impossible? in the example [10,10,10] they got 30, 20, 10 — 20 is between 20 and 28, but they said impossible. that contradicts the rule. the rule says \"if you found any result between 20 and 28 inclusive → likely\" but in that example they had 20 (10+10) and still said impossible. so the rule must be interpreted as: only if the result is from a valid operation that could lead to 24? actually the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" but in the [10,10,10] example, they had 20 (10+10) and 30 (10+10+10) — 20 is between 20 and 28, but they said impossible. so the rule is not applied that way. the rule likely means: if you found a result that is close to 24 but not exact, like 23.5 or 24.5, then likely. but 23 is not close to 24? 23 is 1 away. the rule says between 20 and 28 inclusive, but that would include 23. however, the example contradicts. so i think the rule is meant for results that are close to 24, like within a few units, but not necessarily exact. but 23 is 1 away, that's close. but the example [10,10,10] had 20 which is 4 away, and they said impossible. so maybe the rule is: if you found a result that is within 0.001 of 24 → sure; else if you found a result that is within, say, 4 of 24 (i.e., 20 to 28) but only if that result came from a plausible intermediate step? actually the rule says \"any result between 20 and 28 inclusive\" — but in [10,10,10] they had 20 and 30, 20 is in that range, but they said impossible. so the rule must be misapplied. perhaps the rule is only for the final result after using all three numbers? in [10,10,10], 10+10=20 is not using all three numbers, but 10+10+10=30 is using all three. so the rule likely applies to the final result after combining all three numbers. in our case, we have 8+2+13=23 (using all three) — that is between 20 and 28, so that would be \"likely\". but the memory critic says impossible. however, the rule is explicit: if you found any result between 20 and 28 inclusive → likely. we have 23 from 8+2+13. so that would be \"likely\". but the example [10,10,10] had 10+10+10=30 which is not between 20 and 28, and 10+10=20 is not using all three, so they said impossible. so for us, 8+2+13=23 is using all three and is between 20 and 28, so that would be \"likely\". but wait, the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 (inclusive) → likely.\" so 23 qualifies. so answer should be \"likely\". but the memory critic says prior verdict was impossible. however, the instruction says \"if you agree → answer: impossible. if you see a path the memory missed → answer: sure/likely.\" i don't see a path to 24, but i see 23 which is close. the rule says likely. so i'll go with likely.\n\nbut let me double-check: is there any way to get 24? 8*2=16,"
+            ],
+            "reasoning": [
+              "⚡ PATTERN HINT: matches failure pattern (hit=21, ops=['unknown'])",
+              "LLM evaluations: ['impossible', 'impossible', 'impossible']",
+              "Votes: sure=0, likely=0, impossible=3",
+              "🔒 PATTERN PENALTY: LLM confirmed + pattern match → score 0.001 → 0.001",
+              "Raw score: 0.001, Final score: 0.001"
+            ],
+            "score_breakdown": {
+              "raw_responses": [
+                "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 * 13 = 130 (no). 10 - 13 = -3 (no). 13 - 10 = 3 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 * 2 = 42 (no). 21 - 2 = 19 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 * 8 = 120 (no). 15 - 8 = 7 (no).  \n- attempt 5: try (13 - 8) = 5, then 5 * 2 = 10 (no). (13 + 2) = 15, 15 - 8 = 7 (no). (8 + 13) = 21, 21 + 2 = 23 (no). no path found.  \n\nno result within 0.001 of 24, and no result between 20 and 28 (closest was 23).  \n\nanswer: impossible",
+                "- attempt 1 (division): 13 / 2 = 6.5, 6.5 * 8 = 52 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615 (no). 2 / 13 = 0.154 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6, 6 * 13 = 78 (no). 13 - 8 = 5, 5 * 2 = 10 (no). 13 - 2 = 11, 11 * 8 = 88 (no).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 16 - 13 = 3 (no). 16 * 13 = 208 (no). 16 / 13 = 1.23 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 - 13 = -3 (no). 10 * 13 = 130 (no). 10 / 13 = 0.77 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 - 8 = 7 (no). 15 * 8 = 120 (no). 15 / 8 = 1.875 (no).  \n- attempt 5: no combination yields 24. closest was 23 or 26, but not within 0.001 of 24.  \n\nanswer: impossible",
+                "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 2 + 13 = 15, 15 + 8 = 23 (no).  \n- attempt 5 (addition with subtraction): 8 + 13 = 21, 21 - 2 = 19 (no). 13 + 2 = 15, 15 - 8 = 7 (no). 8 + 2 = 10, 10 - 13 = -3 (no).  \n\nno result near 24. closest was 23 (from addition) but that’s not within 0.001 of 24, and 23 is not between 20 and 28? wait 23 is between 20 and 28, but the rule says if found any result between 20 and 28 inclusive → likely. but we found 23, 21, 19, etc. 23 is between 20 and 28, so that would be \"likely\"? but the decision rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" we found 23 (from 8+2+13=23) and 21 (8+13=21) and 26 (2*13=26) — all between 20 and 28. so that would be \"likely\". but the memory critic says prior verdict was impossible. however, the rule is explicit: any result between 20 and 28 inclusive → likely. we have 23, 21, 26. so answer should be \"likely\". but wait, the examples show that if no exact 24 but a close result like 23, they still say impossible? in the example [10,10,10] they got 30, 20, 10 — 20 is between 20 and 28, but they said impossible. that contradicts the rule. the rule says \"if you found any result between 20 and 28 inclusive → likely\" but in that example they had 20 (10+10) and still said impossible. so the rule must be interpreted as: only if the result is from a valid operation that could lead to 24? actually the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" but in the [10,10,10] example, they had 20 (10+10) and 30 (10+10+10) — 20 is between 20 and 28, but they said impossible. so the rule is not applied that way. the rule likely means: if you found a result that is close to 24 but not exact, like 23.5 or 24.5, then likely. but 23 is not close to 24? 23 is 1 away. the rule says between 20 and 28 inclusive, but that would include 23. however, the example contradicts. so i think the rule is meant for results that are close to 24, like within a few units, but not necessarily exact. but 23 is 1 away, that's close. but the example [10,10,10] had 20 which is 4 away, and they said impossible. so maybe the rule is: if you found a result that is within 0.001 of 24 → sure; else if you found a result that is within, say, 4 of 24 (i.e., 20 to 28) but only if that result came from a plausible intermediate step? actually the rule says \"any result between 20 and 28 inclusive\" — but in [10,10,10] they had 20 and 30, 20 is in that range, but they said impossible. so the rule must be misapplied. perhaps the rule is only for the final result after using all three numbers? in [10,10,10], 10+10=20 is not using all three numbers, but 10+10+10=30 is using all three. so the rule likely applies to the final result after combining all three numbers. in our case, we have 8+2+13=23 (using all three) — that is between 20 and 28, so that would be \"likely\". but the memory critic says impossible. however, the rule is explicit: if you found any result between 20 and 28 inclusive → likely. we have 23 from 8+2+13. so that would be \"likely\". but the example [10,10,10] had 10+10+10=30 which is not between 20 and 28, and 10+10=20 is not using all three, so they said impossible. so for us, 8+2+13=23 is using all three and is between 20 and 28, so that would be \"likely\". but wait, the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 (inclusive) → likely.\" so 23 qualifies. so answer should be \"likely\". but the memory critic says prior verdict was impossible. however, the instruction says \"if you agree → answer: impossible. if you see a path the memory missed → answer: sure/likely.\" i don't see a path to 24, but i see 23 which is close. the rule says likely. so i'll go with likely.\n\nbut let me double-check: is there any way to get 24? 8*2=16,"
+              ],
+              "mapped_values": [
+                0.001,
+                0.001,
+                0.001
+              ],
+              "vote_counts": {
+                "impossible": 3,
+                "likely": 0,
+                "sure": 0
+              }
+            },
+            "final_value": 0.001,
+            "pattern_match": {
+              "sorted_vals": [
+                12,
+                7,
+                2.0
+              ],
+              "op_sequence": [
+                "unknown"
+              ],
+              "thought": "Raw score: 0.001, Final score: 0.001",
+              "hit_count": 21
+            },
+            "pattern_penalty_applied": true,
+            "judgment": "impossible",
+            "extracted_operation": null,
+            "extracted_result": null
+          },
+          "num_children": 7,
+          "children": {
+            "17": {
+              "id": 17,
+              "parent_id": 4,
+              "state": [
+                6,
+                13
+              ],
+              "action": "[6, 13]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[0] - numbers[1]  # 8 - 2 = 6\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[6, 13]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.\nResult: [6, 13]",
+              "evaluation": {
+                "state": "[6, 13]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 6.0,13.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "18": {
+              "id": 18,
+              "parent_id": 4,
+              "state": [
+                4.0,
+                13
+              ],
+              "action": "[4.0, 13]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[1]  # 8 / 2 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[4.0, 13]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.\nResult: [4.0, 13]",
+              "evaluation": {
+                "state": "[4.0, 13]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 4.0,13.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "19": {
+              "id": 19,
+              "parent_id": 4,
+              "state": [
+                0.25,
+                13
+              ],
+              "action": "[0.25, 13]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[1] / numbers[0]  # 2 / 8 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[0.25, 13]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.\nResult: [0.25, 13]",
+              "evaluation": {
+                "state": "[0.25, 13]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 0.25,13.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "20": {
+              "id": 20,
+              "parent_id": 4,
+              "state": [
+                5,
+                2
+              ],
+              "action": "[5, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "Pair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[2] - numbers[0]  # 13 - 8 = 5\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[5, 2]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.\nResult: [5, 2]",
+              "evaluation": {
+                "state": "[5, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 5.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "21": {
+              "id": 21,
+              "parent_id": 4,
+              "state": [
+                21,
+                2
+              ],
+              "action": "[21, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[2] + numbers[0]  # 13 + 8 = 21\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[21, 2]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.\nResult: [21, 2]",
+              "evaluation": {
+                "state": "[21, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "22": {
+              "id": 22,
+              "parent_id": 4,
+              "state": [
+                104,
+                2
+              ],
+              "action": "[104, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[2] * numbers[0]  # 13 * 8 = 104\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[104, 2]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.\nResult: [104, 2]",
+              "evaluation": {
+                "state": "[104, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 104.0,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            },
+            "23": {
+              "id": 23,
+              "parent_id": 4,
+              "state": [
+                0.6153846153846154,
+                2
+              ],
+              "action": "[0.6153846153846154, 2]",
+              "value": 0.001,
+              "depth": 2,
+              "is_solution": false,
+              "is_pruned": true,
+              "codeact": {
+                "thought": "8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.",
+                "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[2]  # 8 / 13 ≈ 0.615\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+                "observation": "[0.6153846153846154, 2]"
+              },
+              "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.\nResult: [0.6153846153846154, 2]",
+              "evaluation": {
+                "state": "[0.6153846153846154, 2]",
+                "pruned_by": "dead_end_memory_2num_cache",
+                "reason": "no_op_reaches_24: tried all 6 ops on 0.6153846153846154,2.0",
+                "is_final": false,
+                "final_value": 0.001,
+                "heuristic_checks": {
+                  "pruned": true
+                },
+                "reasoning": [
+                  "Pruned by deterministic 2-number cache."
+                ]
+              },
+              "num_children": 0,
+              "children": {}
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 1,
+      "parent_id": 0,
+      "state": [
+        12,
+        2,
+        9
+      ],
+      "action": "[12, 2, 9]",
+      "value": 0.20066666666666666,
+      "depth": 1,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "Pair 0 and 3 (1 and 13) – subtraction gives 12, which is exactly half of 24, very promising.",
+        "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] - numbers[0]  # 13 - 1 = 12\nremaining = [numbers[1], numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[12, 2, 9]"
+      },
+      "path_history": "Pair 0 and 3 (1 and 13) – subtraction gives 12, which is exactly half of 24, very promising.\nResult: [12, 2, 9]",
+      "evaluation": {
+        "state": "[12, 2, 9]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": false,
+          "max_abs_value": 12
+        },
+        "llm_judgments": [
+          "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.67 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.22, 0.22 * 12 = 2.67 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.67 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.56 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.92 (no).  \n- attempt 5: 12 + 2 + 9 = 23 (no). 12 * 2 - 9 = 15 (no). 12 * 2 + 9 = 33 (no). 12 * (2 + 9) = 132 (no). (12 + 2) * 9 = 126 (no). (12 - 2) * 9 = 90 (no). (12 / 2) + 9 = 15 (no). (12 / 2) * 9 = 54 (no). no path found.  \n\nclosest result was 23 (within 20–28), so likely.\n\nanswer: likely",
+          "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.333, 1.333 * 2 = 2.666 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 2 / 12 = 0.1667, 0.1667 * 9 = 1.5 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.666 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). also 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.666 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.555 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: try (12 - 2) = 10, 10 + 9 = 19 (no). (12 - 9) = 3, 3 * 2 = 6 (already). (9 - 2) = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible",
+          "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.66 (no). 2 / 12 = 0.166, 0.166 * 9 = 1.5 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.66 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.66 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.55 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: 12 - 2 = 10, 10 + 9 = 19 (no). 12 - 9 = 3, 3 * 2 = 6 (no). 9 - 2 = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible"
+        ],
+        "reasoning": [
+          "LLM evaluations: ['likely', 'impossible', 'impossible']",
+          "Votes: sure=0, likely=1, impossible=2",
+          "Raw score: 0.201, Final score: 0.201"
+        ],
+        "score_breakdown": {
+          "raw_responses": [
+            "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.67 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.22, 0.22 * 12 = 2.67 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.67 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.56 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.92 (no).  \n- attempt 5: 12 + 2 + 9 = 23 (no). 12 * 2 - 9 = 15 (no). 12 * 2 + 9 = 33 (no). 12 * (2 + 9) = 132 (no). (12 + 2) * 9 = 126 (no). (12 - 2) * 9 = 90 (no). (12 / 2) + 9 = 15 (no). (12 / 2) * 9 = 54 (no). no path found.  \n\nclosest result was 23 (within 20–28), so likely.\n\nanswer: likely",
+            "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.333, 1.333 * 2 = 2.666 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 2 / 12 = 0.1667, 0.1667 * 9 = 1.5 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.666 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). also 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.666 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.555 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: try (12 - 2) = 10, 10 + 9 = 19 (no). (12 - 9) = 3, 3 * 2 = 6 (already). (9 - 2) = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible",
+            "[12, 2, 9]  \n- attempt 1 (division): 12 / 2 = 6, then 6 * 9 = 54 (no). 12 / 9 = 1.33, 1.33 * 2 = 2.66 (no). 2 / 12 = 0.166, 0.166 * 9 = 1.5 (no). 9 / 12 = 0.75, 0.75 * 2 = 1.5 (no). 9 / 2 = 4.5, 4.5 * 12 = 54 (no). 2 / 9 = 0.222, 0.222 * 12 = 2.66 (no).  \n- attempt 2 (close subtraction): 12 - 9 = 3 (factor of 24), then 3 * 2 = 6 (no). 3 + 2 = 5 (no). 3 - 2 = 1 (no). 3 / 2 = 1.5 (no). 9 - 2 = 7 (not factor).  \n- attempt 3 (multiplication): 12 * 2 = 24, then 24 + 9 = 33 (no). 24 - 9 = 15 (no). 24 * 9 = 216 (no). 24 / 9 = 2.66 (no). 12 * 9 = 108, 108 / 2 = 54 (no). 2 * 9 = 18, 18 + 12 = 30 (no). 18 - 12 = 6 (no). 18 * 12 = 216 (no). 18 / 12 = 1.5 (no).  \n- attempt 4 (addition): 12 + 2 = 14, 14 + 9 = 23 (no). 14 - 9 = 5 (no). 14 * 9 = 126 (no). 14 / 9 = 1.55 (no). 12 + 9 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 9 = 11, 11 + 12 = 23 (no). 11 - 12 = -1 (no). 11 * 12 = 132 (no). 11 / 12 = 0.916 (no).  \n- attempt 5: 12 - 2 = 10, 10 + 9 = 19 (no). 12 - 9 = 3, 3 * 2 = 6 (no). 9 - 2 = 7, 7 + 12 = 19 (no). no path found.  \n\nanswer: impossible"
+          ],
+          "mapped_values": [
+            0.6,
+            0.001,
+            0.001
+          ],
+          "vote_counts": {
+            "impossible": 2,
+            "likely": 1,
+            "sure": 0
+          }
+        },
+        "final_value": 0.20066666666666666,
+        "pattern_match": null,
+        "pattern_penalty_applied": false,
+        "judgment": "impossible",
+        "extracted_operation": null,
+        "extracted_result": null
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 2,
+      "parent_id": 0,
+      "state": [
+        22,
+        1,
+        2
+      ],
+      "action": "[22, 1, 2]",
+      "value": 1.2,
+      "depth": 1,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?",
+        "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] + numbers[2]  # 13 + 9 = 22\nremaining = [numbers[0], numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[22, 1, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]",
+      "evaluation": {
+        "state": "[22, 1, 2]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": false,
+          "max_abs_value": 22
+        },
+        "llm_judgments": [
+          "[22, 1, 2]  \n- attempt 1 (division): 22 / 2 = 11, then 11 + 1 = 12 (no). 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+          "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+          "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure"
+        ],
+        "reasoning": [
+          "LLM evaluations: ['sure', 'sure', 'sure']",
+          "Votes: sure=3, likely=0, impossible=0",
+          "Raw score: 1.000, Final score: 1.200"
+        ],
+        "score_breakdown": {
+          "raw_responses": [
+            "[22, 1, 2]  \n- attempt 1 (division): 22 / 2 = 11, then 11 + 1 = 12 (no). 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+            "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure",
+            "[22, 1, 2]  \n- attempt 1 (division): 22 / 1 = 22, then 22 + 2 = 24 (exact!).  \nanswer: sure"
+          ],
+          "mapped_values": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vote_counts": {
+            "impossible": 0,
+            "likely": 0,
+            "sure": 3
+          }
+        },
+        "final_value": 1.2,
+        "pattern_match": null,
+        "pattern_penalty_applied": false,
+        "judgment": "sure",
+        "extracted_operation": null,
+        "extracted_result": null
+      },
+      "num_children": 8,
+      "children": {
+        "5": {
+          "id": 5,
+          "parent_id": 2,
+          "state": [
+            24,
+            1
+          ],
+          "action": "[24, 1]",
+          "value": 0.01,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "22 + 2 gives exactly 24, and we still have 1 to multiply later.",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[2]  # 22 + 2 = 24\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[24, 1]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 2 gives exactly 24, and we still have 1 to multiply later.\nResult: [24, 1]",
+          "evaluation": {
+            "state": "[24, 1]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": true
+            },
+            "llm_judgments": [],
+            "reasoning": [
+              "⚠️ DEAD-END: Contains 24 but not final state"
+            ],
+            "score_breakdown": {},
+            "final_value": 0.01,
+            "pattern_match": null,
+            "pattern_penalty_applied": false
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "6": {
+          "id": 6,
+          "parent_id": 2,
+          "state": [
+            20,
+            1
+          ],
+          "action": "[20, 1]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[2]  # 22 - 2 = 20\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[20, 1]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).\nResult: [20, 1]",
+          "evaluation": {
+            "state": "[20, 1]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 20.0,1.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "7": {
+          "id": 7,
+          "parent_id": 2,
+          "state": [
+            22,
+            2
+          ],
+          "action": "[22, 2]",
+          "value": 1.2,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "22 * 1 = 22, then 22 + 2 = 24.",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] * numbers[1]  # 22 * 1 = 22\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[22, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]",
+          "evaluation": {
+            "state": "[22, 2]",
+            "is_final": false,
+            "heuristic_checks": {
+              "has_premature_24": false,
+              "max_abs_value": 22
+            },
+            "llm_judgments": [
+              "22 + 2 = 24 (exact).  \nanswer: sure",
+              "22 + 2 = 24 (exact).  \nanswer: sure",
+              "22 + 2 = 24 (exact!).  \nanswer: sure"
+            ],
+            "reasoning": [
+              "LLM evaluations: ['sure', 'sure', 'sure']",
+              "Votes: sure=3, likely=0, impossible=0",
+              "Raw score: 1.000, Final score: 1.200",
+              "✅ VERIFIER: '22 + 2=24' confirmed"
+            ],
+            "score_breakdown": {
+              "raw_responses": [
+                "22 + 2 = 24 (exact).  \nanswer: sure",
+                "22 + 2 = 24 (exact).  \nanswer: sure",
+                "22 + 2 = 24 (exact!).  \nanswer: sure"
+              ],
+              "mapped_values": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "vote_counts": {
+                "impossible": 0,
+                "likely": 0,
+                "sure": 3
+              }
+            },
+            "final_value": 1.2,
+            "pattern_match": null,
+            "pattern_penalty_applied": false,
+            "judgment": "sure",
+            "extracted_operation": "22 + 2",
+            "extracted_result": 24.0
+          },
+          "num_children": 1,
+          "children": {
+            "24": {
+              "id": 24,
+              "parent_id": 7,
+              "state": [
+                24.0
+              ],
+              "action": "22 + 2",
+              "value": 1.0,
+              "depth": 3,
+              "is_solution": true,
+              "is_pruned": false,
+              "codeact": {
+                "thought": "From [22, 2], 22 + 2 = 24",
+                "code": "numbers = [22, 2]\na, b = 22, 2\nresult = 22 + 2\nnew_numbers = [result]",
+                "observation": "[24]"
+              },
+              "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]\nOperation: 22 + 2 = 24",
+              "evaluation": null,
+              "num_children": 0,
+              "children": {}
+            }
+          }
+        },
+        "8": {
+          "id": 8,
+          "parent_id": 2,
+          "state": [
+            11.0,
+            1
+          ],
+          "action": "[11.0, 1]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] / numbers[2]  # 22 / 2 = 11\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[11.0, 1]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.\nResult: [11.0, 1]",
+          "evaluation": {
+            "state": "[11.0, 1]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 11.0,1.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "9": {
+          "id": 9,
+          "parent_id": 2,
+          "state": [
+            3,
+            22
+          ],
+          "action": "[3, 22]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "1 + 2 = 3, then 22 + 3 = 25 (close).",
+            "code": "numbers = [22, 1, 2]\nres = numbers[1] + numbers[2]  # 1 + 2 = 3\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[3, 22]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n1 + 2 = 3, then 22 + 3 = 25 (close).\nResult: [3, 22]",
+          "evaluation": {
+            "state": "[3, 22]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 3.0,22.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "10": {
+          "id": 10,
+          "parent_id": 2,
+          "state": [
+            1,
+            22
+          ],
+          "action": "[1, 22]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "2 - 1 = 1, then 22 * 1 = 24.",
+            "code": "numbers = [22, 1, 2]\nres = numbers[2] - numbers[1]  # 2 - 1 = 1\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[1, 22]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n2 - 1 = 1, then 22 * 1 = 24.\nResult: [1, 22]",
+          "evaluation": {
+            "state": "[1, 22]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 1.0,22.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "11": {
+          "id": 11,
+          "parent_id": 2,
+          "state": [
+            23,
+            2
+          ],
+          "action": "[23, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "22 + 1 = 23, then 23 + 2 = 25 (not useful).",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[1]  # 22 + 1 = 23\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[23, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 1 = 23, then 23 + 2 = 25 (not useful).\nResult: [23, 2]",
+          "evaluation": {
+            "state": "[23, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 23.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "12": {
+          "id": 12,
+          "parent_id": 2,
+          "state": [
+            21,
+            2
+          ],
+          "action": "[21, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "22 - 1 = 21, then 21 + 2 = 23.",
+            "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[1]  # 22 - 1 = 21\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[21, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 1 = 21, then 21 + 2 = 23.\nResult: [21, 2]",
+          "evaluation": {
+            "state": "[21, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        }
+      }
+    },
+    {
+      "id": 3,
+      "parent_id": 0,
+      "state": [
+        4,
+        1,
+        2
+      ],
+      "action": "[4, 1, 2]",
+      "value": 0.001,
+      "depth": 1,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.",
+        "code": "numbers = [1, 2, 9, 13]\nres = numbers[3] - numbers[2]  # 13 - 9 = 4\nremaining = [numbers[0], numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[4, 1, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]",
+      "evaluation": {
+        "state": "[4, 1, 2]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": false,
+          "max_abs_value": 4
+        },
+        "llm_judgments": [
+          "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1 (factor of 24), then 1 * 4 = 4 (no). 4 - 2 = 2 (factor), then 2 * 1 = 2 (no). 4 - 1 = 3 (factor), then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 * 1 = 8 (no). 1 * 2 = 2, then 2 * 4 = 8 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no). 4 + 2 = 6, then 6 * 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no).  \n- attempt 5 (other combos): 4 + 1 + 2 = 7 (no). 4 * (1 + 2) = 12 (no). (4 + 2) * 1 = 6 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no result near 24.\n\nanswer: impossible",
+          "attempt 1 (division):  \n4 / 1 = 4, then 4 * 2 = 8 (no).  \n4 / 2 = 2, then 2 * 1 = 2 (no).  \n1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no).  \n2 / 1 = 2, then 2 * 4 = 8 (no).  \n1 / 2 = 0.5, then 0.5 * 4 = 2 (no).  \n\nattempt 2 (close subtraction):  \nclosest numbers: 1 and 2 → 2 - 1 = 1 (factor of 24).  \nthen 1 * 4 = 4 (no).  \n4 / 1 = 4 (no).  \n4 + 1 = 5 (no).  \n4 - 1 = 3 (no).  \n\nattempt 3 (multiplication):  \n4 * 1 = 4, then 4 * 2 = 8 (no).  \n4 * 2 = 8, then 8 * 1 = 8 (no).  \n1 * 2 = 2, then 2 * 4 = 8 (no).  \nalso try 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no).  \n\nattempt 4 (addition):  \n4 + 1 = 5, then 5 * 2 = 10 (no).  \n4 + 2 = 6, then 6 * 1 = 6 (no).  \n1 + 2 = 3, then 3 * 4 = 12 (no).  \nalso 4 + 1 + 2 = 7 (no).  \n\nattempt 5 (other combos):  \n(4 - 1) = 3, then 3 * 2 = 6 (no).  \n(4 - 2) = 2, then 2 * 1 = 2 (no).  \n(1 + 2) = 3, then 4 / 3 = 1.33 (no).  \n(4 / 1) = 4, then 4 + 2 = 6 (no).  \nno result near 24.  \n\nanswer: impossible",
+          "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1, then 1 * 4 = 4 (no). 4 - 2 = 2, then 2 * 1 = 2 (no). 4 - 1 = 3, then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no). 1 * 2 = 2, then 2 + 4 = 6 (no), 2 * 4 = 8 (no), 4 - 2 = 2 (no), 4 / 2 = 2 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no), 5 + 2 = 7 (no), 5 - 2 = 3 (no), 5 / 2 = 2.5 (no). 4 + 2 = 6, then 6 * 1 = 6 (no), 6 + 1 = 7 (no), 6 - 1 = 5 (no), 6 / 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no), 3 + 4 = 7 (no), 4 - 3 = 1 (no), 4 / 3 ≈ 1.33 (no).  \n- attempt 5: 4 * (2 + 1) = 12 (no). (4 + 1) * 2 = 10 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no path found.  \n\nanswer: impossible"
+        ],
+        "reasoning": [
+          "⚡ PATTERN HINT: matches failure pattern (hit=12, ops=['unknown'])",
+          "LLM evaluations: ['impossible', 'impossible', 'impossible']",
+          "Votes: sure=0, likely=0, impossible=3",
+          "🔒 PATTERN PENALTY: LLM confirmed + pattern match → score 0.001 → 0.001",
+          "Raw score: 0.001, Final score: 0.001"
+        ],
+        "score_breakdown": {
+          "raw_responses": [
+            "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1 (factor of 24), then 1 * 4 = 4 (no). 4 - 2 = 2 (factor), then 2 * 1 = 2 (no). 4 - 1 = 3 (factor), then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 * 1 = 8 (no). 1 * 2 = 2, then 2 * 4 = 8 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no). 4 + 2 = 6, then 6 * 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no).  \n- attempt 5 (other combos): 4 + 1 + 2 = 7 (no). 4 * (1 + 2) = 12 (no). (4 + 2) * 1 = 6 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no result near 24.\n\nanswer: impossible",
+            "attempt 1 (division):  \n4 / 1 = 4, then 4 * 2 = 8 (no).  \n4 / 2 = 2, then 2 * 1 = 2 (no).  \n1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no).  \n2 / 1 = 2, then 2 * 4 = 8 (no).  \n1 / 2 = 0.5, then 0.5 * 4 = 2 (no).  \n\nattempt 2 (close subtraction):  \nclosest numbers: 1 and 2 → 2 - 1 = 1 (factor of 24).  \nthen 1 * 4 = 4 (no).  \n4 / 1 = 4 (no).  \n4 + 1 = 5 (no).  \n4 - 1 = 3 (no).  \n\nattempt 3 (multiplication):  \n4 * 1 = 4, then 4 * 2 = 8 (no).  \n4 * 2 = 8, then 8 * 1 = 8 (no).  \n1 * 2 = 2, then 2 * 4 = 8 (no).  \nalso try 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no).  \n\nattempt 4 (addition):  \n4 + 1 = 5, then 5 * 2 = 10 (no).  \n4 + 2 = 6, then 6 * 1 = 6 (no).  \n1 + 2 = 3, then 3 * 4 = 12 (no).  \nalso 4 + 1 + 2 = 7 (no).  \n\nattempt 5 (other combos):  \n(4 - 1) = 3, then 3 * 2 = 6 (no).  \n(4 - 2) = 2, then 2 * 1 = 2 (no).  \n(1 + 2) = 3, then 4 / 3 = 1.33 (no).  \n(4 / 1) = 4, then 4 + 2 = 6 (no).  \nno result near 24.  \n\nanswer: impossible",
+            "- attempt 1 (division): 4 / 1 = 4, then 4 * 2 = 8 (no). 4 / 2 = 2, then 2 * 1 = 2 (no). 2 / 1 = 2, then 2 * 4 = 8 (no). 1 / 2 = 0.5, then 0.5 * 4 = 2 (no). 2 / 4 = 0.5, then 0.5 * 1 = 0.5 (no). 1 / 4 = 0.25, then 0.25 * 2 = 0.5 (no).  \n- attempt 2 (close subtraction): 2 - 1 = 1, then 1 * 4 = 4 (no). 4 - 2 = 2, then 2 * 1 = 2 (no). 4 - 1 = 3, then 3 * 2 = 6 (no).  \n- attempt 3 (multiplication): 4 * 1 = 4, then 4 * 2 = 8 (no). 4 * 2 = 8, then 8 + 1 = 9 (no), 8 - 1 = 7 (no), 8 / 1 = 8 (no). 1 * 2 = 2, then 2 + 4 = 6 (no), 2 * 4 = 8 (no), 4 - 2 = 2 (no), 4 / 2 = 2 (no).  \n- attempt 4 (addition): 4 + 1 = 5, then 5 * 2 = 10 (no), 5 + 2 = 7 (no), 5 - 2 = 3 (no), 5 / 2 = 2.5 (no). 4 + 2 = 6, then 6 * 1 = 6 (no), 6 + 1 = 7 (no), 6 - 1 = 5 (no), 6 / 1 = 6 (no). 1 + 2 = 3, then 3 * 4 = 12 (no), 3 + 4 = 7 (no), 4 - 3 = 1 (no), 4 / 3 ≈ 1.33 (no).  \n- attempt 5: 4 * (2 + 1) = 12 (no). (4 + 1) * 2 = 10 (no). (4 - 1) * 2 = 6 (no). (4 / 1) + 2 = 6 (no). no path found.  \n\nanswer: impossible"
+          ],
+          "mapped_values": [
+            0.001,
+            0.001,
+            0.001
+          ],
+          "vote_counts": {
+            "impossible": 3,
+            "likely": 0,
+            "sure": 0
+          }
+        },
+        "final_value": 0.001,
+        "pattern_match": {
+          "sorted_vals": [
+            4,
+            2,
+            1
+          ],
+          "op_sequence": [
+            "unknown"
+          ],
+          "thought": "Raw score: 0.001, Final score: 0.001",
+          "hit_count": 12
+        },
+        "pattern_penalty_applied": true,
+        "judgment": "impossible",
+        "extracted_operation": null,
+        "extracted_result": null
+      },
+      "num_children": 4,
+      "children": {
+        "13": {
+          "id": 13,
+          "parent_id": 3,
+          "state": [
+            3,
+            2
+          ],
+          "action": "[3, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.",
+            "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[1]  # 4 - 1 = 3\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[3, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.\nResult: [3, 2]",
+          "evaluation": {
+            "state": "[3, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 3.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "14": {
+          "id": 14,
+          "parent_id": 3,
+          "state": [
+            4,
+            2
+          ],
+          "action": "[4, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.",
+            "code": "numbers = [4, 1, 2]\nres = numbers[0] * numbers[1]  # 4 * 1 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[4, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.\nResult: [4, 2]",
+          "evaluation": {
+            "state": "[4, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 4.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "15": {
+          "id": 15,
+          "parent_id": 3,
+          "state": [
+            0.25,
+            2
+          ],
+          "action": "[0.25, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.",
+            "code": "numbers = [4, 1, 2]\nres = numbers[1] / numbers[0]  # 1 / 4 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[0.25, 2]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.\nResult: [0.25, 2]",
+          "evaluation": {
+            "state": "[0.25, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 0.25,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "16": {
+          "id": 16,
+          "parent_id": 3,
+          "state": [
+            2,
+            1
+          ],
+          "action": "[2, 1]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.",
+            "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[2]  # 4 - 2 = 2\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[2, 1]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.\nResult: [2, 1]",
+          "evaluation": {
+            "state": "[2, 1]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 2.0,1.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        }
+      }
+    },
+    {
+      "id": 4,
+      "parent_id": 0,
+      "state": [
+        8,
+        2,
+        13
+      ],
+      "action": "[8, 2, 13]",
+      "value": 0.001,
+      "depth": 1,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.",
+        "code": "numbers = [1, 2, 9, 13]\nres = numbers[2] - numbers[0]   # 9 - 1 = 8\nremaining = [numbers[1], numbers[3]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[8, 2, 13]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]",
+      "evaluation": {
+        "state": "[8, 2, 13]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": false,
+          "max_abs_value": 13
+        },
+        "llm_judgments": [
+          "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 * 13 = 130 (no). 10 - 13 = -3 (no). 13 - 10 = 3 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 * 2 = 42 (no). 21 - 2 = 19 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 * 8 = 120 (no). 15 - 8 = 7 (no).  \n- attempt 5: try (13 - 8) = 5, then 5 * 2 = 10 (no). (13 + 2) = 15, 15 - 8 = 7 (no). (8 + 13) = 21, 21 + 2 = 23 (no). no path found.  \n\nno result within 0.001 of 24, and no result between 20 and 28 (closest was 23).  \n\nanswer: impossible",
+          "- attempt 1 (division): 13 / 2 = 6.5, 6.5 * 8 = 52 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615 (no). 2 / 13 = 0.154 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6, 6 * 13 = 78 (no). 13 - 8 = 5, 5 * 2 = 10 (no). 13 - 2 = 11, 11 * 8 = 88 (no).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 16 - 13 = 3 (no). 16 * 13 = 208 (no). 16 / 13 = 1.23 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 - 13 = -3 (no). 10 * 13 = 130 (no). 10 / 13 = 0.77 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 - 8 = 7 (no). 15 * 8 = 120 (no). 15 / 8 = 1.875 (no).  \n- attempt 5: no combination yields 24. closest was 23 or 26, but not within 0.001 of 24.  \n\nanswer: impossible",
+          "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 2 + 13 = 15, 15 + 8 = 23 (no).  \n- attempt 5 (addition with subtraction): 8 + 13 = 21, 21 - 2 = 19 (no). 13 + 2 = 15, 15 - 8 = 7 (no). 8 + 2 = 10, 10 - 13 = -3 (no).  \n\nno result near 24. closest was 23 (from addition) but that’s not within 0.001 of 24, and 23 is not between 20 and 28? wait 23 is between 20 and 28, but the rule says if found any result between 20 and 28 inclusive → likely. but we found 23, 21, 19, etc. 23 is between 20 and 28, so that would be \"likely\"? but the decision rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" we found 23 (from 8+2+13=23) and 21 (8+13=21) and 26 (2*13=26) — all between 20 and 28. so that would be \"likely\". but the memory critic says prior verdict was impossible. however, the rule is explicit: any result between 20 and 28 inclusive → likely. we have 23, 21, 26. so answer should be \"likely\". but wait, the examples show that if no exact 24 but a close result like 23, they still say impossible? in the example [10,10,10] they got 30, 20, 10 — 20 is between 20 and 28, but they said impossible. that contradicts the rule. the rule says \"if you found any result between 20 and 28 inclusive → likely\" but in that example they had 20 (10+10) and still said impossible. so the rule must be interpreted as: only if the result is from a valid operation that could lead to 24? actually the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" but in the [10,10,10] example, they had 20 (10+10) and 30 (10+10+10) — 20 is between 20 and 28, but they said impossible. so the rule is not applied that way. the rule likely means: if you found a result that is close to 24 but not exact, like 23.5 or 24.5, then likely. but 23 is not close to 24? 23 is 1 away. the rule says between 20 and 28 inclusive, but that would include 23. however, the example contradicts. so i think the rule is meant for results that are close to 24, like within a few units, but not necessarily exact. but 23 is 1 away, that's close. but the example [10,10,10] had 20 which is 4 away, and they said impossible. so maybe the rule is: if you found a result that is within 0.001 of 24 → sure; else if you found a result that is within, say, 4 of 24 (i.e., 20 to 28) but only if that result came from a plausible intermediate step? actually the rule says \"any result between 20 and 28 inclusive\" — but in [10,10,10] they had 20 and 30, 20 is in that range, but they said impossible. so the rule must be misapplied. perhaps the rule is only for the final result after using all three numbers? in [10,10,10], 10+10=20 is not using all three numbers, but 10+10+10=30 is using all three. so the rule likely applies to the final result after combining all three numbers. in our case, we have 8+2+13=23 (using all three) — that is between 20 and 28, so that would be \"likely\". but the memory critic says impossible. however, the rule is explicit: if you found any result between 20 and 28 inclusive → likely. we have 23 from 8+2+13. so that would be \"likely\". but the example [10,10,10] had 10+10+10=30 which is not between 20 and 28, and 10+10=20 is not using all three, so they said impossible. so for us, 8+2+13=23 is using all three and is between 20 and 28, so that would be \"likely\". but wait, the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 (inclusive) → likely.\" so 23 qualifies. so answer should be \"likely\". but the memory critic says prior verdict was impossible. however, the instruction says \"if you agree → answer: impossible. if you see a path the memory missed → answer: sure/likely.\" i don't see a path to 24, but i see 23 which is close. the rule says likely. so i'll go with likely.\n\nbut let me double-check: is there any way to get 24? 8*2=16,"
+        ],
+        "reasoning": [
+          "⚡ PATTERN HINT: matches failure pattern (hit=21, ops=['unknown'])",
+          "LLM evaluations: ['impossible', 'impossible', 'impossible']",
+          "Votes: sure=0, likely=0, impossible=3",
+          "🔒 PATTERN PENALTY: LLM confirmed + pattern match → score 0.001 → 0.001",
+          "Raw score: 0.001, Final score: 0.001"
+        ],
+        "score_breakdown": {
+          "raw_responses": [
+            "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 * 13 = 130 (no). 10 - 13 = -3 (no). 13 - 10 = 3 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 * 2 = 42 (no). 21 - 2 = 19 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 * 8 = 120 (no). 15 - 8 = 7 (no).  \n- attempt 5: try (13 - 8) = 5, then 5 * 2 = 10 (no). (13 + 2) = 15, 15 - 8 = 7 (no). (8 + 13) = 21, 21 + 2 = 23 (no). no path found.  \n\nno result within 0.001 of 24, and no result between 20 and 28 (closest was 23).  \n\nanswer: impossible",
+            "- attempt 1 (division): 13 / 2 = 6.5, 6.5 * 8 = 52 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615 (no). 2 / 13 = 0.154 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6, 6 * 13 = 78 (no). 13 - 8 = 5, 5 * 2 = 10 (no). 13 - 2 = 11, 11 * 8 = 88 (no).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 16 - 13 = 3 (no). 16 * 13 = 208 (no). 16 / 13 = 1.23 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no). 26 + 8 = 34 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 10 - 13 = -3 (no). 10 * 13 = 130 (no). 10 / 13 = 0.77 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 21 - 2 = 19 (no). 21 * 2 = 42 (no). 21 / 2 = 10.5 (no). 2 + 13 = 15, 15 + 8 = 23 (no). 15 - 8 = 7 (no). 15 * 8 = 120 (no). 15 / 8 = 1.875 (no).  \n- attempt 5: no combination yields 24. closest was 23 or 26, but not within 0.001 of 24.  \n\nanswer: impossible",
+            "- attempt 1 (division): 13 / 2 = 6.5, 6.5 + 8 = 14.5 (no). 13 / 8 = 1.625, 1.625 * 2 = 3.25 (no). 8 / 2 = 4, 4 * 13 = 52 (no). 8 / 13 = 0.615, 0.615 * 2 = 1.23 (no). 2 / 13 = 0.154 (no). 2 / 8 = 0.25, 0.25 * 13 = 3.25 (no).  \n- attempt 2 (close subtraction): 8 - 2 = 6 (factor of 24), then 6 * 13 = 78 (no). 13 - 8 = 5 (not factor), 13 - 2 = 11 (not factor).  \n- attempt 3 (multiplication): 8 * 2 = 16, 16 + 13 = 29 (no). 8 * 13 = 104, 104 / 2 = 52 (no). 2 * 13 = 26, 26 - 8 = 18 (no).  \n- attempt 4 (addition): 8 + 2 = 10, 10 + 13 = 23 (no). 8 + 13 = 21, 21 + 2 = 23 (no). 2 + 13 = 15, 15 + 8 = 23 (no).  \n- attempt 5 (addition with subtraction): 8 + 13 = 21, 21 - 2 = 19 (no). 13 + 2 = 15, 15 - 8 = 7 (no). 8 + 2 = 10, 10 - 13 = -3 (no).  \n\nno result near 24. closest was 23 (from addition) but that’s not within 0.001 of 24, and 23 is not between 20 and 28? wait 23 is between 20 and 28, but the rule says if found any result between 20 and 28 inclusive → likely. but we found 23, 21, 19, etc. 23 is between 20 and 28, so that would be \"likely\"? but the decision rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" we found 23 (from 8+2+13=23) and 21 (8+13=21) and 26 (2*13=26) — all between 20 and 28. so that would be \"likely\". but the memory critic says prior verdict was impossible. however, the rule is explicit: any result between 20 and 28 inclusive → likely. we have 23, 21, 26. so answer should be \"likely\". but wait, the examples show that if no exact 24 but a close result like 23, they still say impossible? in the example [10,10,10] they got 30, 20, 10 — 20 is between 20 and 28, but they said impossible. that contradicts the rule. the rule says \"if you found any result between 20 and 28 inclusive → likely\" but in that example they had 20 (10+10) and still said impossible. so the rule must be interpreted as: only if the result is from a valid operation that could lead to 24? actually the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 inclusive → likely.\" but in the [10,10,10] example, they had 20 (10+10) and 30 (10+10+10) — 20 is between 20 and 28, but they said impossible. so the rule is not applied that way. the rule likely means: if you found a result that is close to 24 but not exact, like 23.5 or 24.5, then likely. but 23 is not close to 24? 23 is 1 away. the rule says between 20 and 28 inclusive, but that would include 23. however, the example contradicts. so i think the rule is meant for results that are close to 24, like within a few units, but not necessarily exact. but 23 is 1 away, that's close. but the example [10,10,10] had 20 which is 4 away, and they said impossible. so maybe the rule is: if you found a result that is within 0.001 of 24 → sure; else if you found a result that is within, say, 4 of 24 (i.e., 20 to 28) but only if that result came from a plausible intermediate step? actually the rule says \"any result between 20 and 28 inclusive\" — but in [10,10,10] they had 20 and 30, 20 is in that range, but they said impossible. so the rule must be misapplied. perhaps the rule is only for the final result after using all three numbers? in [10,10,10], 10+10=20 is not using all three numbers, but 10+10+10=30 is using all three. so the rule likely applies to the final result after combining all three numbers. in our case, we have 8+2+13=23 (using all three) — that is between 20 and 28, so that would be \"likely\". but the memory critic says impossible. however, the rule is explicit: if you found any result between 20 and 28 inclusive → likely. we have 23 from 8+2+13. so that would be \"likely\". but the example [10,10,10] had 10+10+10=30 which is not between 20 and 28, and 10+10=20 is not using all three, so they said impossible. so for us, 8+2+13=23 is using all three and is between 20 and 28, so that would be \"likely\". but wait, the rule says \"if you found a result within 0.001 of 24 → sure. else if you found any result between 20 and 28 (inclusive) → likely.\" so 23 qualifies. so answer should be \"likely\". but the memory critic says prior verdict was impossible. however, the instruction says \"if you agree → answer: impossible. if you see a path the memory missed → answer: sure/likely.\" i don't see a path to 24, but i see 23 which is close. the rule says likely. so i'll go with likely.\n\nbut let me double-check: is there any way to get 24? 8*2=16,"
+          ],
+          "mapped_values": [
+            0.001,
+            0.001,
+            0.001
+          ],
+          "vote_counts": {
+            "impossible": 3,
+            "likely": 0,
+            "sure": 0
+          }
+        },
+        "final_value": 0.001,
+        "pattern_match": {
+          "sorted_vals": [
+            12,
+            7,
+            2.0
+          ],
+          "op_sequence": [
+            "unknown"
+          ],
+          "thought": "Raw score: 0.001, Final score: 0.001",
+          "hit_count": 21
+        },
+        "pattern_penalty_applied": true,
+        "judgment": "impossible",
+        "extracted_operation": null,
+        "extracted_result": null
+      },
+      "num_children": 7,
+      "children": {
+        "17": {
+          "id": 17,
+          "parent_id": 4,
+          "state": [
+            6,
+            13
+          ],
+          "action": "[6, 13]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[0] - numbers[1]  # 8 - 2 = 6\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[6, 13]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.\nResult: [6, 13]",
+          "evaluation": {
+            "state": "[6, 13]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 6.0,13.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "18": {
+          "id": 18,
+          "parent_id": 4,
+          "state": [
+            4.0,
+            13
+          ],
+          "action": "[4.0, 13]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[1]  # 8 / 2 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[4.0, 13]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.\nResult: [4.0, 13]",
+          "evaluation": {
+            "state": "[4.0, 13]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 4.0,13.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "19": {
+          "id": 19,
+          "parent_id": 4,
+          "state": [
+            0.25,
+            13
+          ],
+          "action": "[0.25, 13]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[1] / numbers[0]  # 2 / 8 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[0.25, 13]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.\nResult: [0.25, 13]",
+          "evaluation": {
+            "state": "[0.25, 13]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 0.25,13.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "20": {
+          "id": 20,
+          "parent_id": 4,
+          "state": [
+            5,
+            2
+          ],
+          "action": "[5, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "Pair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[2] - numbers[0]  # 13 - 8 = 5\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[5, 2]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.\nResult: [5, 2]",
+          "evaluation": {
+            "state": "[5, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 5.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "21": {
+          "id": 21,
+          "parent_id": 4,
+          "state": [
+            21,
+            2
+          ],
+          "action": "[21, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[2] + numbers[0]  # 13 + 8 = 21\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[21, 2]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.\nResult: [21, 2]",
+          "evaluation": {
+            "state": "[21, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "22": {
+          "id": 22,
+          "parent_id": 4,
+          "state": [
+            104,
+            2
+          ],
+          "action": "[104, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[2] * numbers[0]  # 13 * 8 = 104\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[104, 2]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.\nResult: [104, 2]",
+          "evaluation": {
+            "state": "[104, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 104.0,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        },
+        "23": {
+          "id": 23,
+          "parent_id": 4,
+          "state": [
+            0.6153846153846154,
+            2
+          ],
+          "action": "[0.6153846153846154, 2]",
+          "value": 0.001,
+          "depth": 2,
+          "is_solution": false,
+          "is_pruned": true,
+          "codeact": {
+            "thought": "8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.",
+            "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[2]  # 8 / 13 ≈ 0.615\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+            "observation": "[0.6153846153846154, 2]"
+          },
+          "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.\nResult: [0.6153846153846154, 2]",
+          "evaluation": {
+            "state": "[0.6153846153846154, 2]",
+            "pruned_by": "dead_end_memory_2num_cache",
+            "reason": "no_op_reaches_24: tried all 6 ops on 0.6153846153846154,2.0",
+            "is_final": false,
+            "final_value": 0.001,
+            "heuristic_checks": {
+              "pruned": true
+            },
+            "reasoning": [
+              "Pruned by deterministic 2-number cache."
+            ]
+          },
+          "num_children": 0,
+          "children": {}
+        }
+      }
+    },
+    {
+      "id": 5,
+      "parent_id": 2,
+      "state": [
+        24,
+        1
+      ],
+      "action": "[24, 1]",
+      "value": 0.01,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "22 + 2 gives exactly 24, and we still have 1 to multiply later.",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[2]  # 22 + 2 = 24\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[24, 1]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 2 gives exactly 24, and we still have 1 to multiply later.\nResult: [24, 1]",
+      "evaluation": {
+        "state": "[24, 1]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": true
+        },
+        "llm_judgments": [],
+        "reasoning": [
+          "⚠️ DEAD-END: Contains 24 but not final state"
+        ],
+        "score_breakdown": {},
+        "final_value": 0.01,
+        "pattern_match": null,
+        "pattern_penalty_applied": false
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 6,
+      "parent_id": 2,
+      "state": [
+        20,
+        1
+      ],
+      "action": "[20, 1]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[2]  # 22 - 2 = 20\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[20, 1]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 2 = 20, then 20 + 1 = 21 (not yet 24, but exploring).\nResult: [20, 1]",
+      "evaluation": {
+        "state": "[20, 1]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 20.0,1.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 7,
+      "parent_id": 2,
+      "state": [
+        22,
+        2
+      ],
+      "action": "[22, 2]",
+      "value": 1.2,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "22 * 1 = 22, then 22 + 2 = 24.",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] * numbers[1]  # 22 * 1 = 22\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[22, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]",
+      "evaluation": {
+        "state": "[22, 2]",
+        "is_final": false,
+        "heuristic_checks": {
+          "has_premature_24": false,
+          "max_abs_value": 22
+        },
+        "llm_judgments": [
+          "22 + 2 = 24 (exact).  \nanswer: sure",
+          "22 + 2 = 24 (exact).  \nanswer: sure",
+          "22 + 2 = 24 (exact!).  \nanswer: sure"
+        ],
+        "reasoning": [
+          "LLM evaluations: ['sure', 'sure', 'sure']",
+          "Votes: sure=3, likely=0, impossible=0",
+          "Raw score: 1.000, Final score: 1.200",
+          "✅ VERIFIER: '22 + 2=24' confirmed"
+        ],
+        "score_breakdown": {
+          "raw_responses": [
+            "22 + 2 = 24 (exact).  \nanswer: sure",
+            "22 + 2 = 24 (exact).  \nanswer: sure",
+            "22 + 2 = 24 (exact!).  \nanswer: sure"
+          ],
+          "mapped_values": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vote_counts": {
+            "impossible": 0,
+            "likely": 0,
+            "sure": 3
+          }
+        },
+        "final_value": 1.2,
+        "pattern_match": null,
+        "pattern_penalty_applied": false,
+        "judgment": "sure",
+        "extracted_operation": "22 + 2",
+        "extracted_result": 24.0
+      },
+      "num_children": 1,
+      "children": {
+        "24": {
+          "id": 24,
+          "parent_id": 7,
+          "state": [
+            24.0
+          ],
+          "action": "22 + 2",
+          "value": 1.0,
+          "depth": 3,
+          "is_solution": true,
+          "is_pruned": false,
+          "codeact": {
+            "thought": "From [22, 2], 22 + 2 = 24",
+            "code": "numbers = [22, 2]\na, b = 22, 2\nresult = 22 + 2\nnew_numbers = [result]",
+            "observation": "[24]"
+          },
+          "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]\nOperation: 22 + 2 = 24",
+          "evaluation": null,
+          "num_children": 0,
+          "children": {}
+        }
+      }
+    },
+    {
+      "id": 8,
+      "parent_id": 2,
+      "state": [
+        11.0,
+        1
+      ],
+      "action": "[11.0, 1]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] / numbers[2]  # 22 / 2 = 11\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[11.0, 1]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 / 2 = 11, then 11 + 1 = 12, then 12 * 2? No, but let's see.\nResult: [11.0, 1]",
+      "evaluation": {
+        "state": "[11.0, 1]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 11.0,1.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 9,
+      "parent_id": 2,
+      "state": [
+        3,
+        22
+      ],
+      "action": "[3, 22]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "1 + 2 = 3, then 22 + 3 = 25 (close).",
+        "code": "numbers = [22, 1, 2]\nres = numbers[1] + numbers[2]  # 1 + 2 = 3\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[3, 22]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n1 + 2 = 3, then 22 + 3 = 25 (close).\nResult: [3, 22]",
+      "evaluation": {
+        "state": "[3, 22]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 3.0,22.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 10,
+      "parent_id": 2,
+      "state": [
+        1,
+        22
+      ],
+      "action": "[1, 22]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "2 - 1 = 1, then 22 * 1 = 24.",
+        "code": "numbers = [22, 1, 2]\nres = numbers[2] - numbers[1]  # 2 - 1 = 1\nremaining = [numbers[0]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[1, 22]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n2 - 1 = 1, then 22 * 1 = 24.\nResult: [1, 22]",
+      "evaluation": {
+        "state": "[1, 22]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 1.0,22.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 11,
+      "parent_id": 2,
+      "state": [
+        23,
+        2
+      ],
+      "action": "[23, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "22 + 1 = 23, then 23 + 2 = 25 (not useful).",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] + numbers[1]  # 22 + 1 = 23\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[23, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 + 1 = 23, then 23 + 2 = 25 (not useful).\nResult: [23, 2]",
+      "evaluation": {
+        "state": "[23, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 23.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 12,
+      "parent_id": 2,
+      "state": [
+        21,
+        2
+      ],
+      "action": "[21, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "22 - 1 = 21, then 21 + 2 = 23.",
+        "code": "numbers = [22, 1, 2]\nres = numbers[0] - numbers[1]  # 22 - 1 = 21\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[21, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 - 1 = 21, then 21 + 2 = 23.\nResult: [21, 2]",
+      "evaluation": {
+        "state": "[21, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 13,
+      "parent_id": 3,
+      "state": [
+        3,
+        2
+      ],
+      "action": "[3, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.",
+        "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[1]  # 4 - 1 = 3\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[3, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair 4 and 1 using addition → 5, then 5 × 2 = 10 (not 24). But let's see if we can get 24 by multiplying: (4+1)×2 = 10. Not useful. Skip addition for now.  \nActually, let's check (4+2)×1 = 6, not 24.  \nBetter: (4×2)+1 = 9, not 24.  \nTry (4×1)×2 = 8, not 24.  \nHmm, 24 = 4×6, 4×(2+1)=12. No.  \nWait: 24 = (4-1)×? (4-1)=3, 3×?=24 → ?=8, but we have 2, not 8.  \nMaybe 24 = 4/(1/2) = 8, no.  \nLet's systematically solve: We need one operation to reduce to two numbers, then another.  \nPossible: (4+2)=6, then 6×1=6; (4×2)=8, 8×1=8; (4-2)=2, 2×1=2; (4/2)=2, 2×1=2; (1+2)=3, 4×3=12; (1-2)=-1, 4×(-1)=-4; (2-1)=1, 4×1=4. None give 24 directly.  \nWait: (4+2)×(1+?) but only 3 numbers. Actually we can do: (4+2)×1 = 6, then if we had 4 more... but no.  \nLet's try: (4×2)+1=9, (4×2)-1=7, (4/2)+1=3, (4/2)-1=1.  \nSo no direct 24. But maybe we can get 24 by (4+2)×(1+?) no.  \nActually, we can do: 4/(1/2) = 8, then 8×? no.  \nLet's just enumerate all possible results from pair operations and see if any can combine with the third to make 24.\n\n**Step 1**  \nThought: Pair (4,1) with subtraction 4-1=3, remaining 2. Then 3×?=24 → ?=8, but 2≠8. 3+2=5, 3×2=6, 3-2=1, 3/2=1.5. None give 24. But maybe 24/(3)=8, not 2. So not promising.\nResult: [3, 2]",
+      "evaluation": {
+        "state": "[3, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 3.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 14,
+      "parent_id": 3,
+      "state": [
+        4,
+        2
+      ],
+      "action": "[4, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.",
+        "code": "numbers = [4, 1, 2]\nres = numbers[0] * numbers[1]  # 4 * 1 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[4, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with multiplication 4×1=4, remaining 2. Then 4×?=24 → ?=6, but we have 2. 4+2=6, then 6×4? No, 4×2=8, 4+2=6, 4-2=2, 4/2=2. But wait, 4×2=8, 8×? no. Actually 4×2=8, 8×?=24 → ?=3, but we have 4? No, we already used 4. So no.\nResult: [4, 2]",
+      "evaluation": {
+        "state": "[4, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 4.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 15,
+      "parent_id": 3,
+      "state": [
+        0.25,
+        2
+      ],
+      "action": "[0.25, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.",
+        "code": "numbers = [4, 1, 2]\nres = numbers[1] / numbers[0]  # 1 / 4 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[0.25, 2]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,1) with division 1/4=0.25, remaining 2. 0.25×2=0.5, 0.25+2=2.25, etc. Not useful.\nResult: [0.25, 2]",
+      "evaluation": {
+        "state": "[0.25, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 0.25,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 16,
+      "parent_id": 3,
+      "state": [
+        2,
+        1
+      ],
+      "action": "[2, 1]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.",
+        "code": "numbers = [4, 1, 2]\nres = numbers[0] - numbers[2]  # 4 - 2 = 2\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[2, 1]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – difference 4, factor of 24.\nResult: [4, 1, 2]\nPair (4,2) with subtraction 4-2=2, remaining 1. Then 2×1=2, 2+1=3, 2-1=1, 2/1=2. No 24.\nResult: [2, 1]",
+      "evaluation": {
+        "state": "[2, 1]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 2.0,1.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 17,
+      "parent_id": 4,
+      "state": [
+        6,
+        13
+      ],
+      "action": "[6, 13]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[0] - numbers[1]  # 8 - 2 = 6\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[6, 13]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 2 - multiply to get 16, then add 13 = 29 (not helpful). Try 8/2=4, then 13+4=17 or 13*4=52. Not promising. Try 8-2=6, then 13+6=19, 13*6=78, 13-6=7, 13/6≈2.17. 6 and 13 could make 24 via 13+6+5? No. This seems weak.\nResult: [6, 13]",
+      "evaluation": {
+        "state": "[6, 13]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 6.0,13.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 18,
+      "parent_id": 4,
+      "state": [
+        4.0,
+        13
+      ],
+      "action": "[4.0, 13]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[1]  # 8 / 2 = 4\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[4.0, 13]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/2=4, then 13+4=17, 13-4=9, 13*4=52, 13/4=3.25. None give 24 directly, but 4 and 13 can make 24 via 13+4+7? No. Weak.\nResult: [4.0, 13]",
+      "evaluation": {
+        "state": "[4.0, 13]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 4.0,13.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 19,
+      "parent_id": 4,
+      "state": [
+        0.25,
+        13
+      ],
+      "action": "[0.25, 13]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[1] / numbers[0]  # 2 / 8 = 0.25\nremaining = [numbers[2]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[0.25, 13]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n2/8 = 0.25, then with 13. 13+0.25=13.25, 13-0.25=12.75, 13*0.25=3.25, 13/0.25=52. Not helpful.\nResult: [0.25, 13]",
+      "evaluation": {
+        "state": "[0.25, 13]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 0.25,13.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 20,
+      "parent_id": 4,
+      "state": [
+        5,
+        2
+      ],
+      "action": "[5, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "Pair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[2] - numbers[0]  # 13 - 8 = 5\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[5, 2]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\nPair 8 and 13 - 13-8=5, then 5*2=10, 5+2=7, 5*2+? No. But 5 and 2 can make 10 or 7, not 24. Weak.\nResult: [5, 2]",
+      "evaluation": {
+        "state": "[5, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 5.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 21,
+      "parent_id": 4,
+      "state": [
+        21,
+        2
+      ],
+      "action": "[21, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[2] + numbers[0]  # 13 + 8 = 21\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[21, 2]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13+8=21, then 21+2=23, 21-2=19, 21*2=42, 21/2=10.5. Close to 24 but not there. However 21 and 2 could make 24 via 21+3? No.\nResult: [21, 2]",
+      "evaluation": {
+        "state": "[21, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 21.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 22,
+      "parent_id": 4,
+      "state": [
+        104,
+        2
+      ],
+      "action": "[104, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[2] * numbers[0]  # 13 * 8 = 104\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[104, 2]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n13*8=104, then with 2. 104+2=106, 104-2=102, 104*2=208, 104/2=52. Too large, not useful.\nResult: [104, 2]",
+      "evaluation": {
+        "state": "[104, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 104.0,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 23,
+      "parent_id": 4,
+      "state": [
+        0.6153846153846154,
+        2
+      ],
+      "action": "[0.6153846153846154, 2]",
+      "value": 0.001,
+      "depth": 2,
+      "is_solution": false,
+      "is_pruned": true,
+      "codeact": {
+        "thought": "8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.",
+        "code": "numbers = [8, 2, 13]\nres = numbers[0] / numbers[2]  # 8 / 13 ≈ 0.615\nremaining = [numbers[1]]\nnew_numbers = [res] + remaining\nprint(new_numbers)",
+        "observation": "[0.6153846153846154, 2]"
+      },
+      "path_history": "Use 9-1=8, leaving 2 and 13, could make 8*3 with (13-? no) but 8* (13-? ) maybe not. Still promising.\nResult: [8, 2, 13]\n8/13 ≈ 0.615, then with 2. 0.615+2=2.615, 0.615*2=1.23, 2-0.615=1.385, 2/0.615≈3.25. Not helpful.\nResult: [0.6153846153846154, 2]",
+      "evaluation": {
+        "state": "[0.6153846153846154, 2]",
+        "pruned_by": "dead_end_memory_2num_cache",
+        "reason": "no_op_reaches_24: tried all 6 ops on 0.6153846153846154,2.0",
+        "is_final": false,
+        "final_value": 0.001,
+        "heuristic_checks": {
+          "pruned": true
+        },
+        "reasoning": [
+          "Pruned by deterministic 2-number cache."
+        ]
+      },
+      "num_children": 0,
+      "children": {}
+    },
+    {
+      "id": 24,
+      "parent_id": 7,
+      "state": [
+        24.0
+      ],
+      "action": "22 + 2",
+      "value": 1.0,
+      "depth": 3,
+      "is_solution": true,
+      "is_pruned": false,
+      "codeact": {
+        "thought": "From [22, 2], 22 + 2 = 24",
+        "code": "numbers = [22, 2]\na, b = 22, 2\nresult = 22 + 2\nnew_numbers = [result]",
+        "observation": "[24]"
+      },
+      "path_history": "Pair 2 and 3 (9 and 13) – sum 22, close to 24, might combine with 2+?\nResult: [22, 1, 2]\n22 * 1 = 22, then 22 + 2 = 24.\nResult: [22, 2]\nOperation: 22 + 2 = 24",
+      "evaluation": null,
+      "num_children": 0,
+      "children": {}
+    }
+  ],
+  "solutions": [
+    24
+  ],
+  "inconsistency_report": {
+    "enabled": true,
+    "statistics": {
+      "total_evaluations": 5,
+      "re_evaluations": 0,
+      "unique_states": 5,
+      "inconsistent_states": 0,
+      "re_evaluation_rate": "0.0%",
+      "inconsistency_rate": "0%"
+    },
+    "inconsistent_states": [],
+    "suspicious_states": []
+  }
+}

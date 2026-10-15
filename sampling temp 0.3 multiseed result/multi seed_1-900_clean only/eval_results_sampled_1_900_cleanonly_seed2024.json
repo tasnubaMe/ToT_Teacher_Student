@@ -1,0 +1,918 @@
+{
+  "model": "./qwen05_finetuned_1_900_cleanonly",
+  "csv": "24.csv",
+  "decoding": "sampled",
+  "seed": 2024,
+  "temperature": 0.3,
+  "top_p": 0.95,
+  "rank_start": 901,
+  "rank_end": 1000,
+  "n_puzzles": 100,
+  "n_correct": 12,
+  "success_rate_pct": 12.0,
+  "no_answer_count": 31,
+  "avg_arithmetic_acc": 0.7403,
+  "total_step_errors": 231,
+  "per_puzzle": [
+    {
+      "puzzle": "4 5 6 10",
+      "response": "10 - 5 = 5 (left: 5 4 6)\n5 + 4 = 9 (left: 9 6)\n9 * 6 = 54 (left: 54 9)\nbacktrack. (to: 9 * (5 + 4))\n9 * (5 + 4) = 54 (left: 54 9)\n54 - 9 = 45 (left: 45 9)\n45 - 9 = 36 (left: 36 9)\n36 - 9 = 27 (left: 27 9)\n27 - 9 = 18 (left: 18 9)\n18 * 9 = 162 (left: 162 9)\n162 / 9 = 18 (left: 18 162)\n18 + 162 = 180 (left: 180 18)\n180 / 18 = 10 (left: 10 180)\n10 + 180 = 190 (left: 190 18)\n190 / 18 = 10 (left: 10 190)\n10 + 190 = 19",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.23076923076923078,
+      "steps_checked": 13,
+      "step_error_count": 10
+    },
+    {
+      "puzzle": "1 2 4 7",
+      "response": "7 - 1 = 6 (left: 6 2 4)\n6 * 2 = 12 (left: 12 4)\n12 * 4 = 48 (left: 48)\nbacktrack. (to: 48 / 6)\n48 / 6 = 8 (left: 8)\nAnswer: (12 * (7 - 1)) / 6 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (12 * (7 - 1)) / 6 = 8'",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "2 5 8 11",
+      "response": "11 - 2 = 9 (left: 9 5 8)\n9 - 5 = 4 (left: 4 8)\n4 * 8 = 32 (left: 32)\nBacktrack. (to: 9 - (11 - 2))\n9 - 11 = -2 (left: -2 5 8)\n-2 + 5 = 3 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: ((11 - 2) - 5) * 8 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 32, not 24",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "3 4 4 13",
+      "response": "13 - 4 = 9 (left: 9 3 4)\n9 + 4 = 13 (left: 13 3)\n13 + 3 = 16 (left: 16)\nBacktrack. (to: 9 + (13 - 4))\n9 + 13 = 22 (left: 22 3)\n22 - 3 = 19 (left: 19 3)\n19 + 3 = 22 (left: 22)\nAnswer: ((13 - 4) + 4) + 3 = 22",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((13 - 4) + 4) + 3 = 22'",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "6 7 8 9",
+      "response": "9 - 7 = 2 (left: 2 6 8)\n2 + 8 = 10 (left: 10 6)\n10 * 6 = 60 (left: 60)\nBacktrack. (to: 2 + (9 - 7))\n9 - 7 = 2 (left: 2 2)\n2 * 2 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8 2)\nAnswer: (2 * (9 - 7)) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (2 * (9 - 7)) * 2 = 8'",
+      "arithmetic_accuracy": 0.6666666666666666,
+      "steps_checked": 6,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "1 11 11 13",
+      "response": "11 - 1 = 10 (left: 10 11 13)\n13 - 11 = 2 (left: 2 10)\n10 + 2 = 12 (left: 12 13)\nAnswer: (11 - 1) + (13 - 11) = 12 13 = 24",
+      "answer_correct": false,
+      "answer_msg": "Eval error: invalid syntax (<string>, line 1)",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 8 10 11",
+      "response": "11 - 1 = 10 (left: 10 8 10)\n10 + 8 = 18 (left: 18 10)\n18 + 10 = 28 (left: 28 1)\nBacktrack. (to: 10 + (10 + 8))\n10 + 8 = 18 (left: 18 10)\n18 + 10 = 28 (left: 28 1)\nBacktrack. (to: 18 + (18 + 10))\n18 + 10 = 28 (left: 28 1)\nBacktrack. (to: 28 + (18 + 10))\n28 + 10 = 38 (left: 38 18)\n38 - 18 = 20 (left: 20 18)\n20 + 18 = 38 (left: 38 20)\n38 - 20 = 18 (left: 18 38)\n18 + 38 = 56 (left: 56 18)\n56 - 18 = 38 (left: 38 56)\n38 - 56 = -18 (",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 12,
+      "step_error_count": 6
+    },
+    {
+      "puzzle": "2 3 6 9",
+      "response": "9 - 3 = 6 (left: 6 2 6)\n6 * 2 = 12 (left: 12 6)\n12 * 6 = 72 (left: 72)\nbacktrack. (to: 6 * (9 - 3))\n9 - 3 = 6 (left: 6 6)\n6 * 6 = 36 (left: 36)\nbacktrack. (to: 6 * (6 * 6))\n6 * 6 = 36 (left: 36)\nbacktrack. (to: 36 / (6 * 6))\n36 / (6 * 6) = 2 (left: 2 36)\n36 / 2 = 18 (left: 18 3)\n18 * 3 = 54 (left: 54)\nbacktrack. (to: 54 / (36 / (6 * 6)))\n54 / (36 / (6 * 6)) = 2 (left: 2 54)\n54 / 2 = 27 (left: 27 54)\n27 * 54 = 1458 (left: 1458)\nanswer: ((54 / (36 / (6 * 6))) / 2",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.3,
+      "steps_checked": 10,
+      "step_error_count": 7
+    },
+    {
+      "puzzle": "1 3 5 9",
+      "response": "9 - 1 = 8 (left: 8 3 5)\n5 - 3 = 2 (left: 2 8)\n2 * 8 = 16 (left: 16)\nBacktrack. (to: 8 5)\n5 - 2 = 3 (left: 3 8)\n3 * 8 = 24 (left: 24)\nAnswer: (5 - 2) * (5 - 3) = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 6, not 24",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "3 3 7 12",
+      "response": "7 - 3 = 4 (left: 4 3 12)\n4 * 3 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: 12 + ((7 - 3) * 3) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 5 7 9",
+      "response": "7 - 5 = 2 (left: 2 4 9)\n2 * 4 = 8 (left: 8 9)\n8 * 9 = 72 (left: 72)\nBacktrack. (to: 2 * (7 - 5))\n2 * (7 - 5) = 72 (left: 72)\n72 / 9 = 8 (left: 8)\nAnswer: (2 * (7 - 5)) / 9 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (2 * (7 - 5)) / 9 = 8'",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "1 2 8 13",
+      "response": "13 - 1 = 12 (left: 12 2 8)\n12 - 8 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8)\nAnswer: ((13 - 1) - 8) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((13 - 1) - 8) * 2 = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 6 6 9",
+      "response": "9 - 6 = 3 (left: 3 4 6)\n3 * 4 = 12 (left: 12 6)\n12 * 6 = 72 (left: 72)\nbacktrack. (to: 3 * (9 - 6))\n3 * (9 - (9 - 6)) = 72",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 4 4 8",
+      "response": "4 * 8 = 32 (left: 32 1 4)\n32 - 1 = 31 (left: 31 4)\n31 - 4 = 27 (left: 27)\nBacktrack. (to: 4 * (32 - 1))\n4 * (32 - 1) = 27",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 5 10 11",
+      "response": "11 - 1 = 10 (left: 10 5 10)\n10 + 5 = 15 (left: 15 10)\n15 + 10 = 25 (left: 25 10)\nBacktrack. (to: 10 + (10 + 5))\n10 + 5 = 15 (left: 15 10)\n15 + 10 = 25 (left: 25 15)\n25 - 15 = 10 (left: 10 15)\n10 + 15 = 25 (left: 25 10)\n25 - 10 = 15 (left: 15 25)\n15 - 25 = -10 (left: -10 15)\n-10 + 15 = 5 (left: 5 15)\n5 + 15 = 20 (left: 20 5)\n20 + 5 = 25 (left: 25 20)\n25 - 20 = 5 (left: 5 25)\n5 + 25 = 30 (left: 30 5)\n30 - 5 = 25 (left:",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.2857142857142857,
+      "steps_checked": 14,
+      "step_error_count": 10
+    },
+    {
+      "puzzle": "3 4 6 11",
+      "response": "3 + 4 = 7 (left: 7 6 11)\n7 + 6 = 13 (left: 13 11)\n13 + 11 = 24 (left: 24)\nAnswer: ((3 + 4) + 6) + 11 = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 4 8 9",
+      "response": "9 - 4 = 5 (left: 5 2 8)\n5 + 2 = 7 (left: 7 8)\n7 * 8 = 56 (left: 56)\nBacktrack. (to: 5 + (9 - 4))\n9 - 4 = 5 (left: 5 5)\n5 + 5 = 10 (left: 10 5)\n10 * 5 = 50 (left: 50)\nBacktrack. (to: 5 + (5 + 5))\n5 + 5 = 10 (left: 10 10)\n10 + 10 = 20 (left: 20 10)\n10 + 20 = 30 (left: 30 10)\nBacktrack. (to: 10 + (10 + 20))\n10 + 20 = 30 (left: 30 10)\n30 + 10 = 40 (left: 40 10)\n10 + 40 = 50 (left: 50 10)\nBacktrack. (to: 10 + (30 + 10))\n30 + 10 = 40 (left: 40 10)\n4",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.46153846153846156,
+      "steps_checked": 13,
+      "step_error_count": 7
+    },
+    {
+      "puzzle": "1 4 5 13",
+      "response": "13 - 5 = 8 (left: 8 1 4)\n8 + 1 = 9 (left: 9 4)\n9 * 4 = 36 (left: 36 9)\nBacktrack. (to: 9 * (8 + 1))\n9 * (8 + 1) = 36 (left: 36 9)\n36 - 9 = 27 (left: 27 9)\n27 - 9 = 18 (left: 18 9)\n18 * 9 = 162 (left: 162 9)\n162 - 9 = 153 (left: 153 9)\n153 - 9 = 144 (left: 144 9)\n144 - 9 = 135 (left: 135 9)\n135 - 9 = 126 (left: 126 9)\n126 - 9 = 117 (left: 117 9)\n117 - 9 = 108 (left: 108 9)\n108 - 9 = 108 (left: 108 9)\n108 - 9 = 108",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.3076923076923077,
+      "steps_checked": 13,
+      "step_error_count": 9
+    },
+    {
+      "puzzle": "2 2 7 12",
+      "response": "7 - 2 = 5 (left: 5 2 12)\n5 + 2 = 7 (left: 7 12)\n7 * 12 = 84 (left: 84)\nBacktrack. (to: 5 + (7 + 2))\n7 + 2 = 9 (left: 9 84)\n9 / 84 = 0.1076923076923077 (left: 0.1076923076923077)\nsqrt(0.1076923076923077) = 0.3162277660168379 (left: 0.3162277660168379)\nsqrt(0.3162277660168379) = 0.564147107936908 (left: 0.564147107936908)\nsqrt(0.564147107936908) = 0.750966944278795 (left: 0.",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "3 3 6 7",
+      "response": "7 - 3 = 4 (left: 4 3 6)\n4 * 3 = 12 (left: 12 6)\n12 * 6 = 72 (left: 72)\nBacktrack. (to: 4 * (7 - 3))\n4 * (7 - 3) = 72\n72 / 4 = 18 (left: 18)\nAnswer: (7 * (3 - 3)) / 4 = 18",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (7 * (3 - 3)) / 4 = 18'",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "1 5 9 13",
+      "response": "13 - 9 = 4 (left: 4 1 5)\n5 + 1 = 6 (left: 6 4)\n6 * 4 = 24 (left: 24)\nAnswer: (5 + 1) * (13 - 9) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 6 7 13",
+      "response": "13 - 7 = 6 (left: 6 5 6)\n6 * 5 = 30 (left: 30 6)\n30 - 6 = 24 (left: 24)\nAnswer: (6 * 5) - (13 - 7) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 5 8 10",
+      "response": "10 - 5 = 5 (left: 5 5 8)\n5 + 5 = 10 (left: 10 8)\n10 * 8 = 80 (left: 80)\nBacktrack. (to: 5 + (10 + 5))\n10 + 5 = 15 (left: 15 80)\n15 / 80 = 0.1875 (left: 0.1875 80)\n80 / 0.1875 = 440 (left: 440)\nAnswer: 80 / ((10 + 5) / (5 + 5)) = 440",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: 80 / ((10 + 5) / (5 + 5)) = 440'",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "2 4 6 12",
+      "response": "12 / 2 = 6 (left: 6 4 6)\n6 * 4 = 24 (left: 24)\nAnswer: (12 / 2) * 4 = 24",
+      "answer_correct": false,
+      "answer_msg": "Wrong numbers: [2, 4, 12] vs [2, 4, 6, 12]",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 2,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "6 7 8 11",
+      "response": "11 - 6 = 5 (left: 5 7 8)\n5 + 7 = 12 (left: 12 8)\n12 * 8 = 96 (left: 96)\nBacktrack. (to: 5 + (11 - 6))\n11 - 5 = 6 (left: 6 7)\n6 + 7 = 13 (left: 13 8)\n13 * 8 = 104 (left: 104)\nBacktrack. (to: 13 + (6 + 7))\n6 + 7 = 13 (left: 13 104)\n13 + 104 = 117 (left: 117)\nBacktrack. (to: 13 + (13 + 104))\n13 + 104 = 117 (left: 117)\nAnswer: ((11 - 6) + 7) + 13 = 117",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((11 - 6) + 7) + 13 = 117'",
+      "arithmetic_accuracy": 0.4444444444444444,
+      "steps_checked": 9,
+      "step_error_count": 5
+    },
+    {
+      "puzzle": "7 9 9 13",
+      "response": "13 - 9 = 4 (left: 4 7 9)\n7 - 9 = -2 (left: -2 4)\n-2 + 4 = 2 (left: 2 7)\n7 * 2 = 14 (left: 14 7)\n7 * (7 - 9) = 14 (left: 14 7)\n7 * (7 - (13 - 9)) = 14 (left: 14 7)\n7 * (7 - (13 - (13 - 9))) = 14 (left: 14 7)\n7 * (7 - (13 - (13 - (13 - 9)))) = 14 (left: 14 7)\n7 * (7 - (13 - (13 - (13 - (13 - 9)))) = 14 (left: 14 7)\n7 * (7 - (13 - (13 - (13 - (13 - (13 - 9)))))) = 14 (left: 14 7)\n7 * (7 - (13 - (13 - (13 - (13 - (13 - (13 - 9))))))) = 14 (left: 14 7)\n7",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "3 6 9 12",
+      "response": "12 - 9 = 3 (left: 3 3 6)\n3 * 6 = 18 (left: 18 3)\n18 + 3 = 21 (left: 21)\nBacktrack. (to: 3 * (12 - 9))\n3 * (12 - 9) = 21\n21 + 3 = 24 (left: 24)\nAnswer: (3 * (12 - 9)) + 3 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 12, not 24",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "6 9 12 13",
+      "response": "13 - 12 = 1 (left: 1 6 9)\n1 + 9 = 10 (left: 10 6)\n10 * 6 = 60 (left: 60)\nBacktrack. (to: 1 + (13 - 12))\n13 - 1 = 12 (left: 12 6)\n12 * 6 = 72 (left: 72)\nBacktrack. (to: 1 + 6)\n1 + 6 = 7 (left: 7 72)\n72 / 7 = 10.285714285714286 (left: 10.285714285714286)\nAnswer: (13 - 12) / (1 + 9) = 72 / 7.028571428571428 = 10.285714285714286",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (13 - 12) / (1 + 9) = 72 / 7.028571428571428 = 10.285714285714286'",
+      "arithmetic_accuracy": 0.5714285714285714,
+      "steps_checked": 7,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "4 7 9 13",
+      "response": "13 - 9 = 4 (left: 4 4 7)\n4 * 7 = 28 (left: 28 4)\n28 - 4 = 24 (left: 24)\nAnswer: (4 * 7) - (13 - 9) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 6 8 12",
+      "response": "12 - 6 = 6 (left: 6 5 8)\n6 * 5 = 30 (left: 30 8)\n30 - 8 = 22 (left: 22 6)\nBacktrack. (to: 6 * (6 * 5))\n6 * 5 = 30 (left: 30 32)\n30 - 32 = -2 (left: -2 30)\n-2 + 30 = 28 (left: 28 30)\n30 - 28 = 2 (left: 2 30)\n30 * 2 = 60 (left: 60 2)\n60 - 2 = 58 (left: 58 2)\n58 / 2 = 29 (left: 29 2)\n29 + 2 = 31 (left: 31 2)\n31 - 2 = 29 (left: 29 2)\n29 / 2 = 14.5 (left: 14.5 2)\n14.5 + 2 = 16.5 (left: 16.5 2)\n16.5 / 2 = 8.25 (left: 8.25",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.35714285714285715,
+      "steps_checked": 14,
+      "step_error_count": 9
+    },
+    {
+      "puzzle": "2 4 6 7",
+      "response": "7 - 6 = 1 (left: 1 2 4)\n1 + 4 = 5 (left: 5 2)\n5 * 2 = 10 (left: 10)\nAnswer: ((7 - 6) + 4) * 2 = 10",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((7 - 6) + 4) * 2 = 10'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 5 10 10",
+      "response": "10 / 10 = 1 (left: 1 2 5)\n1 + 5 = 6 (left: 6 2)\n6 * 2 = 12 (left: 12 6)\nAnswer: ((10 / 10) + 5) * 2 = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((10 / 10) + 5) * 2 = 12'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "6 6 7 12",
+      "response": "7 - 6 = 1 (left: 1 6 12)\n1 + 6 = 7 (left: 7 12)\n7 + 12 = 19 (left: 19 7)\n19 + 7 = 26 (left: 26 7)\n19 + 7 = 26 (left: 26 19)\n26 - 19 = 7 (left: 7 19)\n19 + 7 = 26 (left: 26 19)\n26 - 19 = 7 (left: 7 26)\n26 - 7 = 19 (left: 19 7)\n19 + 7 = 26 (left: 26 19)\n26 - 19 = 7 (left: 7 26)\n26 - 7 = 19 (left: 19 26)\n19 + 26 = 45 (left: 45 7)\n45 - 7 = 38 (left: 38 7)\n38 - 7 = 31 (left: 31 7)\n31 + 7 = 38 (left: 38 31)\n38 - 31 =",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.375,
+      "steps_checked": 16,
+      "step_error_count": 10
+    },
+    {
+      "puzzle": "6 9 9 11",
+      "response": "11 - 9 = 2 (left: 2 6 9)\n9 + 6 = 15 (left: 15 2)\n15 + 2 = 17 (left: 17)\nBacktrack. (to: 2 9)\n9 + 2 = 11 (left: 11 9)\n11 * 9 = 99 (left: 99 1)\n99 / 1 = 99 (left: 99)\nAnswer: ((9 + 6) + 9) / 1 = 99",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((9 + 6) + 9) / 1 = 99'",
+      "arithmetic_accuracy": 0.6666666666666666,
+      "steps_checked": 6,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "5 8 11 12",
+      "response": "11 - 5 = 6 (left: 6 8 12)\n6 + 8 = 14 (left: 14 12)\n14 + 12 = 26 (left: 26)\nBacktrack. (to: 6 + (11 - 5))\n11 - 5 = 6 (left: 6 6)\n6 + 6 = 12 (left: 12)\nAnswer: (11 - 5) + (6 + 6) = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (11 - 5) + (6 + 6) = 12'",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "5 6 8 10",
+      "response": "10 - 5 = 5 (left: 5 6 8)\n5 + 6 = 11 (left: 11 8)\n11 + 8 = 19 (left: 19 5)\nBacktrack. (to: 11 + (5 + 6))\n11 + 5 = 16 (left: 16 8)\n16 + 8 = 24 (left: 24)\nAnswer: ((10 - 5) + 6) + 8 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 19, not 24",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "6 11 12 13",
+      "response": "13 - 11 = 2 (left: 2 6 12)\n2 * 6 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: 12 + ((13 - 11) * 6) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 2 8 8",
+      "response": "8 / 2 = 4 (left: 4 2 8)\n4 * 2 = 8 (left: 8 8)\n8 + 8 = 16 (left: 16)\nBacktrack. (to: 4 * (8 / 2))\n4 * (8 / 2) = 16",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 7 12 13",
+      "response": "13 - 7 = 6 (left: 6 2 12)\n6 + 12 = 18 (left: 18 2)\n18 + 2 = 20 (left: 20)\nBacktrack. (to: 6 + (13 - 7))\n13 - 7 = 6 (left: 6 2)\n6 * 2 = 12 (left: 12)\nAnswer: ((13 - 7) + 12) * 2 = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((13 - 7) + 12) * 2 = 12'",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "2 6 8 12",
+      "response": "12 - 6 = 6 (left: 6 2 8)\n6 * 2 = 12 (left: 12 8)\n12 * 8 = 96 (left: 96)\nBacktrack. (to: 6 * (12 * 2))\n12 * (6 * 2) = 96 (left: 96)\n96 / 6 = 16 (left: 16)\nAnswer: (12 * (6 * 2)) / 6 = 16",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (12 * (6 * 2)) / 6 = 16'",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "3 4 9 13",
+      "response": "13 - 9 = 4 (left: 4 3 4)\n4 + 3 = 7 (left: 7 4)\n7 * 4 = 28 (left: 28)\nBacktrack. (to: 4 + (13 - 9))\n13 - 9 = 4 (left: 4 4)\n4 * 4 = 16 (left: 16)\nAnswer: (4 + (13 - 9)) * 4 = 16",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (4 + (13 - 9)) * 4 = 16'",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "4 5 10 12",
+      "response": "10 - 5 = 5 (left: 5 4 12)\n5 * 4 = 20 (left: 20 12)\n20 + 12 = 32 (left: 32 5)\nBacktrack. (to: 5 * (5 * 4))\n5 * (5 * 4) = 20 (left: 20 32)\n20 + 32 = 52 (left: 52 5)\nBacktrack. (to: 52 / (5 * (5 * 4)))\n52 / (5 * (5 * 4)) = 5 (left: 5 52)\n52 + 5 = 57 (left: 57 5)\nBacktrack. (to: 57 / (52 / (5 * (5 * 4))))\n57 / (52 / (5 * (5 * 4))) = 5 (left: 5 57)\n57 + 5 = 62 (left: 62 5)\nBacktrack. (to: 62 / (57 / (52 / (5 * (5 * 4)))))\n62 / (57 / (52 / (5 * (5 * 4)))) = 5 (left: 5 6",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "1 2 7 11",
+      "response": "11 - 7 = 4 (left: 4 1 2)\n4 * 1 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8)\nAnswer: ((11 - 7) * 1) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((11 - 7) * 1) * 2 = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 5 6 8",
+      "response": "8 - 6 = 2 (left: 2 4 5)\n2 * 5 = 10 (left: 10 4)\n10 * 4 = 40 (left: 40)\nBacktrack. (to: 2 * (8 - 6))\n2 * (8 - (8 - 6)) = 40",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "6 10 12 13",
+      "response": "13 - 10 = 3 (left: 3 6 12)\n3 * 6 = 18 (left: 18 12)\n18 + 12 = 30 (left: 30 1)\nbacktrack. (to: 30 12)\n30 - 12 = 18 (left: 18 3)\n18 + 3 = 21 (left: 21 3)\n21 + 3 = 24 (left: 24)\nAnswer: ((13 - 10) * 6) + 12 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 30, not 24",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "1 3 9 9",
+      "response": "9 / 9 = 1 (left: 1 1 3)\n1 + 1 = 2 (left: 2 3)\n2 * 3 = 6 (left: 6 1)\nAnswer: (1 + (9 / 9)) * 3 = 6",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (1 + (9 / 9)) * 3 = 6'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 4 4 11",
+      "response": "11 - 4 = 7 (left: 7 1 4)\n7 + 1 = 8 (left: 8 4)\n8 * 4 = 32 (left: 32 8)\nBacktrack. (to: 8 * (7 + 1))\n7 + 1 = 8 (left: 8 8)\n8 * 8 = 64 (left: 64 8)\nBacktrack. (to: 64 / (8 * 8))\n64 / (8 * 8) = 8 (left: 8 64)\n8 + 64 = 72 (left: 72 8)\n72 / 8 = 9 (left: 9 8)\n9 * 8 = 72 (left: 72 9)\n72 / 9 = 8 (left: 8 72)\n72 / 8 = 9 (left: 9 72)\n72 / 9 = 8 (left: 8 72)\n72 / 8 = 9 (left: 9 72)\n72 / 9 = 8 (left: 8 72)\n72 / 8 = 9 (left: 9 72)\n72 / 9 = 8 (left: 8",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.35714285714285715,
+      "steps_checked": 14,
+      "step_error_count": 9
+    },
+    {
+      "puzzle": "2 3 9 10",
+      "response": "10 - 9 = 1 (left: 1 2 3)\n1 + 3 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8)\nAnswer: ((10 - 9) + 3) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((10 - 9) + 3) * 2 = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 2 3 13",
+      "response": "13 - 1 = 12 (left: 12 2 3)\n12 * 3 = 36 (left: 36 2)\n36 - 2 = 34 (left: 34 2)\n34 - 2 = 32 (left: 32 2)\n32 - 2 = 30 (left: 30 2)\n30 - 2 = 28 (left: 28 2)\n28 - 2 = 26 (left: 26 2)\n26 - 2 = 24 (left: 24)\nAnswer: (32 - (13 - 1)) - 2 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 18, not 24",
+      "arithmetic_accuracy": 0.375,
+      "steps_checked": 8,
+      "step_error_count": 5
+    },
+    {
+      "puzzle": "1 6 6 6",
+      "response": "6 / 6 = 1 (left: 1 1 6)\n1 + 1 = 2 (left: 2 6)\n2 * 6 = 12 (left: 12 6)\nAnswer: (1 + (6 / 6)) * 6 = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (1 + (6 / 6)) * 6 = 12'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 2 2 9",
+      "response": "1 + 2 = 3 (left: 3 2 9)\n9 - 3 = 6 (left: 6 2)\n6 * 2 = 12 (left: 12 9)\nAnswer: (9 - (1 + 2)) * 2 = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (9 - (1 + 2)) * 2 = 12'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 3 6 11",
+      "response": "11 - 1 = 10 (left: 10 3 6)\n10 + 6 = 16 (left: 16 3)\n16 + 3 = 19 (left: 19)\nBacktrack. (to: 10 + (11 - 1))\n11 - 1 = 10 (left: 10 3)\n10 + 3 = 13 (left: 13 10)\n13 * 10 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130 / 1 = 130 (left: 130 1)\n130",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.35714285714285715,
+      "steps_checked": 14,
+      "step_error_count": 9
+    },
+    {
+      "puzzle": "5 10 12 13",
+      "response": "13 - 10 = 3 (left: 3 5 12)\n3 * 5 = 15 (left: 15 12)\n15 + 12 = 27 (left: 27 3)\nBacktrack. (to: 15 3)\n15 - 3 = 12 (left: 12 3)\n12 * 3 = 36 (left: 36 3)\nBacktrack. (to: 36 3)\n36 - 3 = 33 (left: 33 3)\n33 - 3 = 30 (left: 30 3)\nBacktrack. (to: 30 3)\n30 - 3 = 27 (left: 27 3)\n27 - 3 = 24 (left: 24)\nAnswer: ((36 - 3) - 3) - 3 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 27, not 24",
+      "arithmetic_accuracy": 0.6666666666666666,
+      "steps_checked": 9,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "2 3 6 6",
+      "response": "6 / 6 = 1 (left: 1 2 3)\n1 + 3 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8 1)\nAnswer: ((6 / 6) + 3) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((6 / 6) + 3) * 2 = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "6 7 10 12",
+      "response": "10 - 6 = 4 (left: 4 7 12)\n4 + 7 = 11 (left: 11 12)\n11 + 12 = 23 (left: 23 4)\nBacktrack. (to: 12 4)\n12 - 4 = 8 (left: 8 4)\n8 * 4 = 32 (left: 32 4)\nBacktrack. (to: 4)\n4 * 4 = 16 (left: 16 4)\n16 + 4 = 20 (left: 20 4)\nBacktrack. (to: 4)\n4 * 4 = 16 (left: 16 4)\n16 + 4 = 20 (left: 20 4)\nBacktrack. (to: 4)\n4 * 4 = 16 (left: 16 4)\n16 + 4 = 20 (left: 20 4)\nBacktrack. (to: 4)\n4 * 4 = 16 (left: 16 4)\n16 + 4 = 20 (left: 20 4)\nBacktrack. (to: 4)\n4 * 4 = 16 (left: 16",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.3076923076923077,
+      "steps_checked": 13,
+      "step_error_count": 9
+    },
+    {
+      "puzzle": "7 8 8 12",
+      "response": "8 / 8 = 1 (left: 1 7 12)\n1 + 7 = 8 (left: 8 12)\n8 + 12 = 20 (left: 20 8)\nBacktrack. (to: 1 + 7)\n7 - 1 = 6 (left: 6 20)\n20 - 6 = 14 (left: 14 6)\n14 + 6 = 20 (left: 20 1)\nAnswer: ((8 / 8) + 7) + 1 = 20",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((8 / 8) + 7) + 1 = 20'",
+      "arithmetic_accuracy": 0.8333333333333334,
+      "steps_checked": 6,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "3 4 6 8",
+      "response": "8 - 4 = 4 (left: 4 3 6)\n4 * 3 = 12 (left: 12 6)\n12 * 6 = 72 (left: 72)\nbacktrack. (to: 4 * (8 - 4))\n4 * (8 - (8 - 4)) = 72",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 7 9 11",
+      "response": "11 - 9 = 2 (left: 2 1 7)\n2 * 1 = 2 (left: 2 7)\n2 * 7 = 14 (left: 14 2)\nAnswer: ((11 - 9) * 1) * 7 = 14 2 = 24",
+      "answer_correct": false,
+      "answer_msg": "Eval error: invalid syntax (<string>, line 1)",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 3 6 13",
+      "response": "13 - 6 = 7 (left: 7 2 3)\n7 * 3 = 21 (left: 21 2)\n21 + 2 = 23 (left: 23)\nBacktrack. (to: 7 * (13 - 6))\n7 * (13 - 6) = 21 (left: 21)\n21 + 2 = 23 (left: 23)\nAnswer: ((13 - 6) * 3) + 2 = 23",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((13 - 6) * 3) + 2 = 23'",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "2 2 5 12",
+      "response": "12 / 2 = 6 (left: 6 2 5)\n5 - 2 = 3 (left: 3 6)\n3 * 6 = 18 (left: 18)\nBacktrack. (to: 6 5)\n5 - 6 = -1 (left: -1 6)\n-1 + 6 = 5 (left: 5)\nAnswer: (-1 + 6) + 5 = 5",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (-1 + 6) + 5 = 5'",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "2 6 8 13",
+      "response": "13 - 6 = 7 (left: 7 2 8)\n7 + 8 = 15 (left: 15 2)\n15 + 2 = 17 (left: 17)\nBacktrack. (to: 7 + (13 - 6))\n7 + 13 = 20 (left: 20 17)\n20 - 17 = 3 (left: 3 17)\n17 + 3 = 20 (left: 20)\nAnswer: (7 + (13 - 6)) + 3 = 20",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (7 + (13 - 6)) + 3 = 20'",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "8 8 10 12",
+      "response": "12 - 8 = 4 (left: 4 8 10)\n4 * 8 = 32 (left: 32 10)\n32 - 10 = 22 (left: 22 4)\nBacktrack. (to: 4 * (4 * 8))\n4 * (4 * 8) = 24 (left: 24)\nAnswer: (4 * (4 * 8)) = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 128, not 24",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 3 8 13",
+      "response": "13 - 1 = 12 (left: 12 3 8)\n12 * 3 = 36 (left: 36 8)\n36 - 8 = 28 (left: 28 1)\n28 - 1 = 27 (left: 27 1)\n1 * 27 = 27 (left: 27 1)\n27 - 1 = 26 (left: 26 1)\n26 - 1 = 25 (left: 25 1)\n25 - 1 = 24 (left: 24)\nAnswer: ((13 - 1) * 3) - 8 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 28, not 24",
+      "arithmetic_accuracy": 0.375,
+      "steps_checked": 8,
+      "step_error_count": 5
+    },
+    {
+      "puzzle": "4 4 7 10",
+      "response": "10 - 4 = 6 (left: 6 4 7)\n7 - 4 = 3 (left: 3 6)\n3 * 6 = 18 (left: 18)\nBacktrack. (to: 6 4)\n6 * 4 = 24 (left: 24)\nAnswer: (6 * 4) * (10 - 4) = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 144, not 24",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 4,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 7 10 13",
+      "response": "13 - 10 = 3 (left: 3 1 7)\n3 * 1 = 3 (left: 3 7)\n3 * 7 = 21 (left: 21 3)\n((13 - 10) * 1) + 7 = 21 + 7 = 28 (left: 28 3)\n3 * 28 = 84 (left: 84 3)\n84 / 3 = 28 (left: 28 84)\n(84 / 3) + (13 - 10) = 28 + 3 = 31 (left: 31 84)\n84 + 31 = 115 (left: 115 84)\n115 / 84 = 1.344 (left: 1.344 84)\n84 / 1.344 = 63.78 (left: 63.78 84)\n84 / 63.78 = 1.344 (left: 1.344 84)\n84 / 1.344 = 63.78 (left: 63.78 84)\n84 /",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.3,
+      "steps_checked": 10,
+      "step_error_count": 7
+    },
+    {
+      "puzzle": "1 9 10 13",
+      "response": "10 + 9 = 19 (left: 19 1 13)\n19 + 1 = 20 (left: 20 13)\n20 + 13 = 33 (left: 33 1)\nBacktrack. (to: 13 + 19)\n19 + 13 = 32 (left: 32 1)\n32 + 1 = 33 (left: 33)\nAnswer: ((10 + 9) + 1) + 13 = 33",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((10 + 9) + 1) + 13 = 33'",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "3 3 4 11",
+      "response": "11 - 3 = 8 (left: 8 3 4)\n8 * 3 = 24 (left: 24)\nAnswer: (11 - 3) * 3 = 24",
+      "answer_correct": false,
+      "answer_msg": "Wrong numbers: [3, 3, 11] vs [3, 3, 4, 11]",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 2,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 5 7 7",
+      "response": "7 - 5 = 2 (left: 2 2 7)\n2 * 7 = 14 (left: 14 2)\n14 + 2 = 16 (left: 16)\nBacktrack. (to: 2 * (7 - 5))\n2 * (7 - (5 - 2)) = 16",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "3 9 10 13",
+      "response": "13 - 10 = 3 (left: 3 3 9)\n3 * 9 = 27 (left: 27 3)\n27 - 3 = 24 (left: 24)\nAnswer: (3 * 9) - (13 - 10) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 3 4 7",
+      "response": "7 - 4 = 3 (left: 3 2 3)\n3 * 3 = 9 (left: 9 2)\n9 * 2 = 18 (left: 18)\nBacktrack. (to: 3 * (7 - 4))\n3 * (7 - (7 - 4)) = 18\n18 * 3 = 54 (left: 54 / 9)\n54 / 9 = 6 (left: 6)\nAnswer: (18 * (3 * (7 - (7 - 4)))) / 9 = 6",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (18 * (3 * (7 - (7 - 4)))) / 9 = 6'",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "4 4 8 12",
+      "response": "12 - 4 = 8 (left: 8 4 8)\n8 + 4 = 12 (left: 12 8)\n12 * 8 = 96 (left: 96)\nBacktrack. (to: 8 + (8 + 4))\n8 + 4 = 12 (left: 12 8)\n12 * 8 = 96 (left: 96)\nAnswer: ((8 + 4) + 8) * 8 = 96",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((8 + 4) + 8) * 8 = 96'",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "1 2 6 10",
+      "response": "10 - 6 = 4 (left: 4 1 2)\n4 * 1 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8)\nAnswer: ((10 - 6) * 1) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((10 - 6) * 1) * 2 = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "1 5 12 12",
+      "response": "5 + 12 = 17 (left: 17 1 12)\n17 - 1 = 16 (left: 16 12)\n16 + 12 = 28 (left: 28 1)\nBacktrack. (to: 12 16)\n16 + 12 = 28 (left: 28 12)\n28 - 12 = 16 (left: 16 28)\n((17 + 1) - 1) + 12 = 28 (left: 28 12)\n12 + 12 = 24 (left: 24 12)\n24 + 12 = 36 (left: 36 12)\n((16 + 12) - 1) + 12 = 36 (left: 36 12)\n12 + 12 = 24 (left: 24 12)\n24 + 12 = 36 (left: 36 12)\n((16 + 12) - 1) + 12 = 36 (left: 36 12)\n12 + 12 = 24 (left: 24 12",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.4444444444444444,
+      "steps_checked": 9,
+      "step_error_count": 5
+    },
+    {
+      "puzzle": "5 6 6 8",
+      "response": "6 + 6 = 12 (left: 12 5 8)\n12 * 5 = 60 (left: 60 8)\n60 / 8 = 7.5 (not an integer, so no solution)\nAnswer: ((6 + 6) * 5) / 8 = 7.5",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((6 + 6) * 5) / 8 = 7.5'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 2,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "7 7 8 11",
+      "response": "7 + 7 = 14 (left: 14 8 11)\n14 - 8 = 6 (left: 6 11)\n11 + 6 = 17 (left: 17 11)\nBacktrack. (to: 6 11)\n11 + 6 = 17 (left: 17 11)\n17 + 11 = 28 (left: 28 11)\n11 + 28 = 39 (left: 39 11)\n39 - 11 = 28 (left: 28 11)\n11 + 28 = 39 (left: 39 11)\n39 - 11 = 28 (left: 28 11)\n11 + 28 = 39 (left: 39 11)\n39 - 11 = 28 (left: 28 11)\n11 + 28 = 39 (left: 39 11)\n39 - 11 = 28 (left: 28 11)\n11 + 28 = 39 (left: 39 11)\n39 - 11 = 28 (left:",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.2857142857142857,
+      "steps_checked": 14,
+      "step_error_count": 10
+    },
+    {
+      "puzzle": "1 3 7 10",
+      "response": "10 - 7 = 3 (left: 3 1 3)\n3 * 1 = 3 (left: 3 3)\n3 + 3 = 6 (left: 6)\nAnswer: (3 * 1) + (10 - 7) = 6",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (3 * 1) + (10 - 7) = 6'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "3 3 9 12",
+      "response": "9 - 3 = 6 (left: 6 3 12)\n6 + 3 = 9 (left: 9 12)\n9 + 12 = 21 (left: 21 9)\nBacktrack. (to: 9 + (6 + 3))\n6 + 3 = 9 (left: 9 9)\n9 + 9 = 18 (left: 18 9)\n18 + 9 = 27 (left: 27 9)\nBacktrack. (to: 18 + (9 + 9))\n9 + 9 = 18 (left: 18 18)\n18 + 18 = 36 (left: 36 18)\nBacktrack. (to: 18 + (18 + 18))\n18 + 18 = 36 (left: 36 36)\n36 - 36 = 0 (left: 0 36)\n36 - 0 = 36 (left: 36 3)\n36 + 3 = 39 (left: 39 3)\n39 - 3 = 36 (left: 36 3)\n36 + 3 = 39 (left: 39 3)\n3",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.42857142857142855,
+      "steps_checked": 14,
+      "step_error_count": 8
+    },
+    {
+      "puzzle": "3 5 7 10",
+      "response": "5 - 3 = 2 (left: 2 7 10)\n2 * 7 = 14 (left: 14 10)\n14 + 10 = 24 (left: 24)\nAnswer: ((5 - 3) * 7) + 10 = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 10 12 13",
+      "response": "13 - 10 = 3 (left: 3 4 12)\n3 * 4 = 12 (left: 12 12)\n12 + 12 = 24 (left: 24)\nAnswer: 12 + ((13 - 10) * 4) = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 3 10 12",
+      "response": "10 + 12 = 22 (left: 22 2 3)\n22 + 3 = 25 (left: 25 2)\n25 - 2 = 23 (left: 23 2)\nBacktrack. (to: 22 + (10 + 12))\n22 + 10 = 32 (left: 32 2)\n32 - 2 = 30 (left: 30 2)\nBacktrack. (to: 22 + (22 + 12))\n22 + 12 = 34 (left: 34 2)\n34 - 2 = 32 (left: 32 2)\nBacktrack. (to: 22 + (22 + 10))\n22 + 10 = 32 (left: 32 2)\n32 - 2 = 30 (left: 30 2)\nBacktrack. (to: 22 + (22 + 3))\n22 + 3 = 25 (left: 25 2)\n25 - 2 = 23 (left: 23 2)\nBacktrack. (to: 22 + (32 - 22))\n22 + (22 -",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.5454545454545454,
+      "steps_checked": 11,
+      "step_error_count": 5
+    },
+    {
+      "puzzle": "3 4 6 6",
+      "response": "6 / 6 = 1 (left: 1 3 4)\n1 + 3 = 4 (left: 4 4)\n4 + 4 = 8 (left: 8 1)\nAnswer: (1 + 3) + (4 + 4) = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (1 + 3) + (4 + 4) = 8'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 8 8 8",
+      "response": "5 + 8 = 13 (left: 13 8 8)\n13 - 8 = 5 (left: 5 8)\n5 * 8 = 40 (left: 40)\nBacktrack. (to: 13 - (5 + 8))\n13 - 8 = 5 (left: 5 5)\n5 * 5 = 25 (left: 25)\nBacktrack. (to: 5 * (13 - (5 + 8)))\n5 * (13 - (5 + 8)) = 25",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.8,
+      "steps_checked": 5,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "6 8 8 12",
+      "response": "12 - 6 = 6 (left: 6 8 8)\n8 + 8 = 16 (left: 16 6)\n16 + 6 = 22 (left: 22)\nBacktrack. (to: 6 + (8 + 8))\n6 + 8 = 14 (left: 14 22)\n14 + 22 = 36 (left: 36 14)\n36 - 14 = 22 (left: 22)\nBacktrack. (to: 14 + (14 + 22))\n14 + 22 = 36 (left: 36 14)\n36 - 14 = 22 (left: 22)\nAnswer: ((12 - 6) + 8) - 14 = 22",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((12 - 6) + 8) - 14 = 22'",
+      "arithmetic_accuracy": 0.625,
+      "steps_checked": 8,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "2 3 4 9",
+      "response": "9 - 4 = 5 (left: 5 2 3)\n5 * 3 = 15 (left: 15 2)\n15 + 2 = 17 (left: 17)\nBacktrack. (to: 5 * (9 - 4))\n9 - 5 = 4 (left: 4 2)\n4 * 2 = 8 (left: 8)\nAnswer: (9 - (9 - 5)) * 2 = 8",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (9 - (9 - 5)) * 2 = 8'",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "2 6 7 11",
+      "response": "7 - 6 = 1 (left: 1 2 11)\n1 + 11 = 12 (left: 12 2)\n12 * 2 = 24 (left: 24)\nAnswer: ((7 - 6) + 11) * 2 = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 9 12 12",
+      "response": "12 / 12 = 1 (left: 1 5 9)\n5 - 1 = 4 (left: 4 9)\n4 * 9 = 36 (left: 36 1)\n((5 - 1) * 9) = 36\n13 - 36 = -23 (left: -23 36)\n-23 + 36 = 13 (left: 13 36)\n36 / 13 = 2.764705882352941 (left: 2.764705882352941 2)\n2.764705882352941 * 2 = 5.529411764705882 (left: 5.529411764705882 2)\n5.529411764705882 / 2 = 2.764705882352941 (left: 2.764705882352941 2)\n2.764705882352941 *",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 8,
+      "step_error_count": 4
+    },
+    {
+      "puzzle": "1 2 7 12",
+      "response": "12 - 7 = 5 (left: 5 1 2)\n5 * 1 = 5 (left: 5 2)\n5 * 2 = 10 (left: 10)\nAnswer: ((12 - 7) * 1) * 2 = 10",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((12 - 7) * 1) * 2 = 10'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 4 5 6",
+      "response": "2 * 6 = 12 (left: 12 4 5)\n5 - 4 = 1 (left: 1 12)\n12 + 1 = 13 (left: 13)\nAnswer: (2 * 6) + (5 - 4) = 13",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (2 * 6) + (5 - 4) = 13'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "5 5 8 13",
+      "response": "13 - 5 = 8 (left: 8 5 8)\n8 + 5 = 13 (left: 13 8)\n13 + 8 = 21 (left: 21)\nBacktrack. (to: 8 + (13 - 5))\n13 - 5 = 8 (left: 8 8)\n8 + 8 = 16 (left: 16)\nBacktrack. (to: 8 + 8)\n8 + 8 = 16 (left: 16)\nAnswer: (8 + (13 - 5)) + 8 = 16",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (8 + (13 - 5)) + 8 = 16'",
+      "arithmetic_accuracy": 0.8333333333333334,
+      "steps_checked": 6,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "2 3 3 10",
+      "response": "10 - 3 = 7 (left: 7 2 3)\n7 * 3 = 21 (left: 21 2)\n21 + 2 = 23 (left: 23)\nBacktrack. (to: 7 * (10 - 3))\n7 * (10 - (10 - 3)) = 23",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "3 4 8 12",
+      "response": "12 - 8 = 4 (left: 4 3 4)\n4 * 3 = 12 (left: 12 4)\n12 * 4 = 48 (left: 48)\nBacktrack. (to: 4 * (12 * 3))\n4 * (12 * 3) = 48 (left: 48)\n12 * 3 = 36 (left: 36 4)\n36 - 4 = 32 (left: 32 4)\n32 - 4 = 28 (left: 28 4)\n28 - 4 = 24 (left: 24)\nAnswer: ((12 * 3) - 4) - 4 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 28, not 24",
+      "arithmetic_accuracy": 0.5714285714285714,
+      "steps_checked": 7,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "2 4 6 11",
+      "response": "11 - 6 = 5 (left: 5 2 4)\n5 * 4 = 20 (left: 20 2)\n20 + 2 = 22 (left: 22)\nBacktrack. (to: 5 * (11 - 6))\n5 * (11 - 6) = 22 (left: 22)\n22 + 2 = 24 (left: 24)\nAnswer: (5 * (11 - 6)) + 2 = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 27, not 24",
+      "arithmetic_accuracy": 0.75,
+      "steps_checked": 4,
+      "step_error_count": 1
+    },
+    {
+      "puzzle": "2 2 8 9",
+      "response": "9 - 2 = 7 (left: 7 2 8)\n7 + 2 = 9 (left: 9 8)\n9 * 8 = 72 (left: 72)\nBacktrack. (to: 7 + (9 + 2))\n9 + 2 = 11 (left: 72 - 11)\n72 - 11 = 61 (left: 61 / 7)\n61 / 7 = 8.714285714285714 (not an integer, so we need to check other paths)\n61 / 7 = 8.571428571428571 (not an integer, so we need to check other paths)\n61 / 7 = 8.571428571428571 (not an integer, so we need to check other paths)\n61 / 7 = 8.571428571428571 (not an integer, so we need to check other paths)\n61 / 7 = 8.571428571428571 (not an integer, so we need to check other paths)\n61 / 7 = 8.57142",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    },
+    {
+      "puzzle": "1 5 6 7",
+      "response": "5 + 7 = 12 (left: 12 1 6)\n12 - 1 = 11 (left: 11 6)\n11 + 6 = 17 (left: 17)\nBacktrack. (to: 1 5 6)\n17 - 6 = 11 (left: 11 5)\n11 + 5 = 16 (left: 16)\nBacktrack. (to: 1 5)\n16 - 5 = 11 (left: 11 1)\n11 + 1 = 12 (left: 12 1)\n12 + 1 = 13 (left: 13 1)\n13 + 1 = 14 (left: 14 1)\n14 - 1 = 13 (left: 13 1)\n13 + 1 = 14 (left: 14 1)\n14 - 1 = 13 (left: 13 1)\n13 + 1 = 14 (left: 14 1)\n14 - 1 = 13 (left: 13 1)\n13 + 1 = 14 (left: 14 1)\n14 - 1 = 13",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.3333333333333333,
+      "steps_checked": 15,
+      "step_error_count": 10
+    },
+    {
+      "puzzle": "5 8 10 11",
+      "response": "10 - 5 = 5 (left: 5 8 11)\n5 + 11 = 16 (left: 16 8)\n16 + 8 = 24 (left: 24)\nAnswer: ((10 - 5) + 11) + 8 = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 4 9 12",
+      "response": "9 - 4 = 5 (left: 5 4 12)\n5 + 4 = 9 (left: 9 12)\n9 + 12 = 21 (left: 21 9)\nBacktrack. (to: 5 + (9 + 4))\n9 + (5 + 4) = 18 (left: 18 21)\n18 + 21 = 39 (left: 39 9)\nBacktrack. (to: 18 + (21 + 9))\n21 + (18 + 9) = 40 (left: 40 9)\n40 + 9 = 49 (left: 49 9)\nBacktrack. (to: 40 + (9 + 9))\n9 + (40 + 9) = 57 (left: 57 49)\n57 + 49 = 106 (left: 106 4)\nBacktrack. (to: 57 + (49 + 4))\n49 + (57 + 4) = 102 (left: 102 4)\n102 + 4 = 106 (left: 106 4)\nAnswer: ((9 + 4) + 9",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: ((9 + 4) + 9'",
+      "arithmetic_accuracy": 0.42857142857142855,
+      "steps_checked": 7,
+      "step_error_count": 4
+    },
+    {
+      "puzzle": "2 5 6 6",
+      "response": "6 - 5 = 1 (left: 1 2 6)\n1 * 6 = 6 (left: 6 2)\n6 * 2 = 12 (left: 12 6)\nAnswer: (1 * (6 - 5)) * 2 = 12",
+      "answer_correct": false,
+      "answer_msg": "Cannot parse: 'Answer: (1 * (6 - 5)) * 2 = 12'",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "2 4 9 12",
+      "response": "12 - 9 = 3 (left: 3 2 4)\n3 * 4 = 12 (left: 12 2)\n12 * 2 = 24 (left: 24)\nAnswer: ((12 - 9) * 4) * 2 = 24",
+      "answer_correct": true,
+      "answer_msg": "Correct",
+      "arithmetic_accuracy": 1.0,
+      "steps_checked": 3,
+      "step_error_count": 0
+    },
+    {
+      "puzzle": "4 8 11 13",
+      "response": "13 - 11 = 2 (left: 2 4 8)\n4 * 8 = 32 (left: 32 2)\n32 - 2 = 30 (left: 30)\nBacktrack. (to: 4 * (13 - 11))\n4 * (13 - 11) = 30 (left: 30)\n30 - 2 = 28 (left: 28)\nBacktrack. (to: 32 - (4 * 8))\n32 - (4 * 8) = 28 (left: 28)\n28 - 2 = 26 (left: 26)\nBacktrack. (to: (4 * 8) - ((13 - 11) - 4))\n4 * (13 - 11) - ((13 - 11) - 4) = 26 (left: 26)\n26 - 2 = 24 (left: 24)\nAnswer: ((4 * 8) - ((13 - 11) - 4)) - (4 * (13 - 11)) = 24",
+      "answer_correct": false,
+      "answer_msg": "Evaluates to 26, not 24",
+      "arithmetic_accuracy": 0.5,
+      "steps_checked": 6,
+      "step_error_count": 3
+    },
+    {
+      "puzzle": "4 9 10 13",
+      "response": "10 + 13 = 23 (left: 23 4 9)\n23 - 9 = 14 (left: 14 4)\n14 * 4 = 56 (left: 56)\nBacktrack. (to: 23 - (10 + 13))\n23 - 10 = 13 (left: 13 4)\n13 * 4 = 52 (left: 52)\nBacktrack. (to: 13 * (23 - (10 + 13)))\n13 * (23 - (10 + 13)) = 52",
+      "answer_correct": false,
+      "answer_msg": "No Answer line found",
+      "arithmetic_accuracy": 0.6,
+      "steps_checked": 5,
+      "step_error_count": 2
+    }
+  ]
+}
